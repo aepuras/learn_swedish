@@ -1,0 +1,16 @@
+.scroller li {
+	display: block;
+	float: left;
+	padding: 10px;
+	height: 100%;
+}
+
+.scroller li.selected {
+	background-color: #ffca08;
+	color: #0070af;
+}
+
+.scroller li.disabled {
+	background-color: #4c98c7;
+	color: #c4c5c5;
+}

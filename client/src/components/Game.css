@@ -1,0 +1,95 @@
+.game {
+    color: #ffffff;
+    display: flex;
+    background-color: #0083c5;
+    border-radius: 0.5em;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 14px;
+}
+
+.question {
+    flex: 1;
+    color: #ffffff;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.answer {
+    flex: 1;
+}
+
+.answer > input {
+    border: none;
+    border-bottom: solid 2px #0070af;
+    background-color: rgb(152, 186, 202);
+    transition: border 0.3s;
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.answer > input:focus {
+    outline: none;
+}
+
+.answer > input.hint {
+    color: red;
+}
+
+.answer > input.error {
+    background-color: #ff9e9e;
+}
+
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stats {
+    display: flex;
+    align-content: center;
+}
+
+.stats > div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.stats > div > div {
+    background-color: #dae9f1;
+    border-radius: 1em;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin-right: 10px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #70c570;
+}
+
+.stats > div > div:first-child {
+    color: #f77070;
+}
+
+.buttons {
+    flex: 1;
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttons > div {
+    color: #ffffff;
+    background-color: #0083c5;
+    border-radius: 0.5em;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding: 14px;
+    margin-left: 10px;
+}

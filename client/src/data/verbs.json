@@ -1,0 +1,1293 @@
+[
+  {
+    "name": ["Common"],
+    "items": [
+      {
+        "english": ["be"],
+        "infinitiv": ["vara"],
+        "presens": ["är"],
+        "preteritum": ["var"],
+        "supinum": ["varit"],
+        "imperativum": ["var"]
+      },
+      {
+        "english": ["have"],
+        "infinitiv": ["ha"],
+        "presens": ["har"],
+        "preteritum": ["hade"],
+        "supinum": ["hatt"],
+        "imperativum": ["ha"]
+      },
+      {
+        "english": ["do", "make"],
+        "infinitiv": ["göra"],
+        "presens": ["gör"],
+        "preteritum": ["gjorde"],
+        "supinum": ["gjort"],
+        "imperativum": ["göra"]
+      },
+      {
+        "english": ["can"],
+        "infinitiv": ["kunna"],
+        "presens": ["kan"],
+        "preteritum": ["kunde"],
+        "supinum": ["kunnat"],
+        "imperativum": ["kan"]
+      },
+      {
+        "english": ["know"],
+        "infinitiv": ["veta"],
+        "presens": ["vet"],
+        "preteritum": ["visste"],
+        "supinum": ["vetat"],
+        "imperativum": ["veta"]
+      },
+      {
+        "english": ["know", "feel"],
+        "infinitiv": ["känna"],
+        "presens": ["känner"],
+        "preteritum": ["kände"],
+        "supinum": ["känt"],
+        "imperativum": ["känn"]
+      },
+      {
+        "english": ["understand"],
+        "infinitiv": ["förstå"],
+        "presens": ["förstår"],
+        "preteritum": ["förstod"],
+        "supinum": ["förstått"],
+        "imperativum": ["förstå"]
+      },
+      {
+        "english": ["speak", "talk"],
+        "infinitiv": ["prata"],
+        "presens": ["pratar"],
+        "preteritum": ["pratade"],
+        "supinum": ["pratat"],
+        "imperativum": ["prata"]
+      },
+      {
+        "english": ["listen to"],
+        "infinitiv": ["lyssna"],
+        "presens": ["lyssnar"],
+        "preteritum": ["lyssnade"],
+        "supinum": ["lyssnat"],
+        "imperativum": ["lyssna"]
+      },
+      {
+        "english": ["hear"],
+        "infinitiv": ["höra"],
+        "presens": ["hör"],
+        "preteritum": ["hörde"],
+        "supinum": ["hört"],
+        "imperativum": ["hör"]
+      },
+      {
+        "english": ["see"],
+        "infinitiv": ["se"],
+        "presens": ["ser"],
+        "preteritum": ["såg"],
+        "supinum": ["sett"],
+        "imperativum": ["se"]
+      },
+      {
+        "english": ["live"],
+        "infinitiv": ["leva"],
+        "presens": ["lever"],
+        "preteritum": ["levde"],
+        "supinum": ["levt"],
+        "imperativum": ["lev"]
+      },
+      {
+        "english": ["want"],
+        "infinitiv": ["vilja"],
+        "presens": ["vill"],
+        "preteritum": ["ville"],
+        "supinum": ["velat"],
+        "imperativum": ["vill"]
+      },
+      {
+        "english": ["need"],
+        "infinitiv": ["behöva"],
+        "presens": ["behöver"],
+        "preteritum": ["behövte"],
+        "supinum": ["behövt"],
+        "imperativum": ["behöv"]
+      },
+      {
+        "english": ["like"],
+        "infinitiv": ["gilla"],
+        "presens": ["gillar"],
+        "preteritum": ["gillade"],
+        "supinum": ["gillat"],
+        "imperativum": ["gilla"]
+      },
+      {
+        "english": ["love"],
+        "infinitiv": ["älska"],
+        "presens": ["älskar"],
+        "preteritum": ["älskade"],
+        "supinum": ["älskat"],
+        "imperativum": ["älska"]
+      },
+      {
+        "english": ["give"],
+        "infinitiv": ["ge"],
+        "presens": ["ger"],
+        "preteritum": ["gav"],
+        "supinum": ["gett"],
+        "imperativum": ["ge"]
+      },
+      {
+        "english": ["take"],
+        "infinitiv": ["ta"],
+        "presens": ["tar"],
+        "preteritum": ["tog"],
+        "supinum": ["tagit"],
+        "imperativum": ["ta"]
+      },
+      {
+        "english": ["play"],
+        "infinitiv": ["leka"],
+        "presens": ["lekar"],
+        "preteritum": ["lekte"],
+        "supinum": ["lekt"],
+        "imperativum": ["lek"]
+      },
+      {
+        "english": ["laugh"],
+        "infinitiv": ["skratta"],
+        "presens": ["skrattar"],
+        "preteritum": ["skrattade"],
+        "supinum": ["skrattat"],
+        "imperativum": ["skratta"]
+      },
+      {
+        "english": ["come"],
+        "infinitiv": ["komma"],
+        "presens": ["kommer"],
+        "preteritum": ["kom"],
+        "supinum": ["kommit"],
+        "imperativum": ["kom"]
+      },
+      {
+        "english": ["go"],
+        "infinitiv": ["gå"],
+        "presens": ["går"],
+        "preteritum": ["gick"],
+        "supinum": ["gått"],
+        "imperativum": ["gå"]
+      },
+      {
+        "english": ["write"],
+        "infinitiv": ["skriva"],
+        "presens": ["skriver"],
+        "preteritum": ["skrev"],
+        "supinum": ["skrivit"],
+        "imperativum": ["skriv"]
+      },
+      {
+        "english": ["read"],
+        "infinitiv": ["läsa"],
+        "presens": ["läser"],
+        "preteritum": ["läste"],
+        "supinum": ["läst"],
+        "imperativum": ["läs"]
+      },
+      {
+        "english": ["count"],
+        "infinitiv": ["räkna"],
+        "presens": ["räknar"],
+        "preteritum": ["räknade"],
+        "supinum": ["räknat"],
+        "imperativum": ["räkna"]
+      },
+      {
+        "english": ["pronounce"],
+        "infinitiv": ["uttala"],
+        "presens": ["uttalar"],
+        "preteritum": ["uttalade"],
+        "supinum": ["uttalat"],
+        "imperativum": ["uttala"]
+      },
+      {
+        "english": ["spell"],
+        "infinitiv": ["stava"],
+        "presens": ["stavar"],
+        "preteritum": ["stavade"],
+        "supinum": ["stavat"],
+        "imperativum": ["stava"]
+      },
+      {
+        "english": ["conjugate"],
+        "infinitiv": ["konjugera"],
+        "presens": ["konjugerar"],
+        "preteritum": ["konjugerade"],
+        "supinum": ["konjugerat"],
+        "imperativum": ["konjugera"]
+      },
+      {
+        "english": ["remember"],
+        "infinitiv": ["komma ihåg"],
+        "presens": ["kommer ihåg"],
+        "preteritum": ["kom ihåg"],
+        "supinum": ["kommit ihåg"],
+        "imperativum": ["kom ihåg"]
+      },
+      {
+        "english": ["forget"],
+        "infinitiv": ["glömma"],
+        "presens": ["glömmer"],
+        "preteritum": ["glömde"],
+        "supinum": ["glömt"],
+        "imperativum": ["glömm"]
+      },
+      {
+        "english": ["eat"],
+        "infinitiv": ["äta"],
+        "presens": ["äter"],
+        "preteritum": ["åt"],
+        "supinum": ["ätit"],
+        "imperativum": ["åt"]
+      },
+      {
+        "english": ["try"],
+        "infinitiv": ["försöka"],
+        "presens": ["försöker"],
+        "preteritum": ["försökte"],
+        "supinum": ["försökt"],
+        "imperativum": ["försök"]
+      },
+      {
+        "english": ["use"],
+        "infinitiv": ["använda"],
+        "presens": ["användar"],
+        "preteritum": ["användade"],
+        "supinum": ["använt"],
+        "imperativum": ["använd"]
+      },
+      {
+        "english": ["open"],
+        "infinitiv": ["öppna"],
+        "presens": ["öppnar"],
+        "preteritum": ["öppnade"],
+        "supinum": ["öppnat"],
+        "imperativum": ["öppna"]
+      },
+      {
+        "english": ["close"],
+        "infinitiv": ["stänga"],
+        "presens": ["stänger"],
+        "preteritum": ["stängde"],
+        "supinum": ["stängt"],
+        "imperativum": ["stäng"]
+      },
+      {
+        "english": ["greet", "welcome"],
+        "infinitiv": ["hälsa"],
+        "presens": ["hälsar"],
+        "preteritum": ["hälsade"],
+        "supinum": ["hälsat"],
+        "imperativum": ["hälsa"]
+      },
+      {
+        "english": ["begin"],
+        "infinitiv": ["börja"],
+        "presens": ["börjar"],
+        "preteritum": ["började"],
+        "supinum": ["börjat"],
+        "imperativum": ["börja"]
+      },
+      {
+        "english": ["end"],
+        "infinitiv": ["sluta"],
+        "presens": ["slutar"],
+        "preteritum": ["slutade"],
+        "supinum": ["slutat"],
+        "imperativum": ["sluta"]
+      },
+      {
+        "english": ["agree"],
+        "infinitiv": ["stämma"],
+        "presens": ["stämmer"],
+        "preteritum": ["stämde"],
+        "supinum": ["stämt"],
+        "imperativum": ["stämma"]
+      },
+      {
+        "english": ["call"],
+        "infinitiv": ["kalla"],
+        "presens": ["kallar"],
+        "preteritum": ["kallade"],
+        "supinum": ["kallat"],
+        "imperativum": ["kalla"]
+      },
+      {
+        "english": ["solve"],
+        "infinitiv": ["lösa"],
+        "presens": ["löser"],
+        "preteritum": ["löste"],
+        "supinum": ["löst"],
+        "imperativum": ["lösa"]
+      },
+      {
+        "english": ["beg", "pray"],
+        "infinitiv": ["be"],
+        "presens": ["ber"],
+        "preteritum": ["bad"],
+        "supinum": ["bett"],
+        "imperativum": ["be"]
+      },
+      {
+        "english": ["decide"],
+        "infinitiv": ["besluta"],
+        "presens": ["besluter", "beslutar"],
+        "preteritum": ["beslöt", "beslutade"],
+        "supinum": ["beslutit", "beslutat"],
+        "imperativum": ["besluta"]
+      },
+      {
+        "english": ["compare"],
+        "infinitiv": ["jämföra"],
+        "presens": ["jämför"],
+        "preteritum": ["jämförde"],
+        "supinum": ["jämfört"],
+        "imperativum": ["jämföra"]
+      },
+      {
+        "english": ["belong"],
+        "infinitiv": ["tillhöra"],
+        "presens": ["tillhör"],
+        "preteritum": ["tillhörde"],
+        "supinum": ["tillhört"],
+        "imperativum": ["tillhöra"]
+      }
+    ]
+  },
+  {
+    "name": ["Irregular"],
+    "items": [
+      {
+        "english": ["ask", "pray"],
+        "infinitiv": ["be"],
+        "presens": ["ber"],
+        "preteritum": ["bad"],
+        "supinum": ["bett"],
+        "imperativum": ["be"]
+      },
+      {
+        "english": ["decide"],
+        "infinitiv": ["besluta"],
+        "presens": ["besluter", "beslutar"],
+        "preteritum": ["beslöt", "beslutade"],
+        "supinum": ["beslutit", "beslutat"],
+        "imperativum": ["besluta"]
+      },
+      {
+        "english": ["bind"],
+        "infinitiv": ["binda"],
+        "presens": ["binder"],
+        "preteritum": ["band"],
+        "supinum": ["bundit"],
+        "imperativum": ["bind"]
+      },
+      {
+        "english": ["bite"],
+        "infinitiv": ["bita"],
+        "presens": ["biter"],
+        "preteritum": ["bet"],
+        "supinum": ["bitit"],
+        "imperativum": ["bit"]
+      },
+      {
+        "english": ["offer", "bid"],
+        "infinitiv": ["bjuda"],
+        "presens": ["bjuder"],
+        "preteritum": ["bjöd"],
+        "supinum": ["bjudit"],
+        "imperativum": ["bjud"]
+      },
+      {
+        "english": ["become"],
+        "infinitiv": ["bli", "bliva"],
+        "presens": ["blir", "bliver"],
+        "preteritum": ["blev"],
+        "supinum": ["blivit"],
+        "imperativum": ["bli", "bliv"]
+      },
+      {
+        "english": ["burn"],
+        "infinitiv": ["brinna"],
+        "presens": ["brinner"],
+        "preteritum": ["brann"],
+        "supinum": ["brunnit"],
+        "imperativum": ["brinn"]
+      },
+      {
+        "english": ["burst", "snap"],
+        "infinitiv": ["brista"],
+        "presens": ["brister"],
+        "preteritum": ["brast"],
+        "supinum": ["brustit"],
+        "imperativum": ["brist"]
+      },
+      {
+        "english": ["break"],
+        "infinitiv": ["bryta"],
+        "presens": ["bryter"],
+        "preteritum": ["bröt"],
+        "supinum": ["brutit"],
+        "imperativum": ["bryt"]
+      },
+      {
+        "english": ["bear"],
+        "infinitiv": ["bära"],
+        "presens": ["bär"],
+        "preteritum": ["bar"],
+        "supinum": ["burit"],
+        "imperativum": ["bär"]
+      },
+      {
+        "english": ["should"],
+        "infinitiv": ["böra"],
+        "presens": ["bör"],
+        "preteritum": ["borde"],
+        "supinum": ["bort"]
+      },
+      {
+        "english": ["draw", "drag", "pull"],
+        "infinitiv": ["dra"],
+        "presens": ["drar"],
+        "preteritum": ["drog"],
+        "supinum": ["dragit"],
+        "imperativum": ["dra"]
+      },
+      {
+        "english": ["drink"],
+        "infinitiv": ["dricka"],
+        "presens": ["dricker"],
+        "preteritum": ["drack"],
+        "supinum": ["druckit"],
+        "imperativum": ["drick"]
+      },
+      {
+        "english": ["propel", "drive"],
+        "infinitiv": ["driva"],
+        "presens": ["driver"],
+        "preteritum": ["drev"],
+        "supinum": ["drivit"],
+        "imperativum": ["driv"]
+      },
+      {
+        "english": ["be adequate", "be suitable"],
+        "infinitiv": ["duga"],
+        "presens": ["duger"],
+        "preteritum": ["dög"],
+        "supinum": ["dugt"],
+        "imperativum": ["dug"]
+      },
+      {
+        "english": ["dive"],
+        "infinitiv": ["dyka"],
+        "presens": ["dyker"],
+        "preteritum": ["dök", "dykte"],
+        "supinum": ["dykt"],
+        "imperativum": ["dyk"]
+      },
+      {
+        "english": ["die"],
+        "infinitiv": ["dö"],
+        "presens": ["dör"],
+        "preteritum": ["dog"],
+        "supinum": ["dött"],
+        "imperativum": ["dö"]
+      },
+      {
+        "english": ["fall"],
+        "infinitiv": ["falla"],
+        "presens": ["faller"],
+        "preteritum": ["föll"],
+        "supinum": ["fallit"],
+        "imperativum": ["fall"]
+      },
+      {
+        "english": ["move", "travel"],
+        "infinitiv": ["fara"],
+        "presens": ["far"],
+        "preteritum": ["for"],
+        "supinum": ["farit"],
+        "imperativum": ["far"]
+      },
+      {
+        "english": ["find"],
+        "infinitiv": ["finna"],
+        "presens": ["finner"],
+        "preteritum": ["fann"],
+        "supinum": ["funnit"],
+        "imperativum": ["finn"]
+      },
+      {
+        "english": ["exist"],
+        "infinitiv": ["finnas"],
+        "presens": ["finns"],
+        "preteritum": ["fanns"],
+        "supinum": ["funnits"]
+      },
+      {
+        "english": ["fly"],
+        "infinitiv": ["flyga"],
+        "presens": ["flyger"],
+        "preteritum": ["flög"],
+        "supinum": ["flugit"],
+        "imperativum": ["flyg"]
+      },
+      {
+        "english": ["float"],
+        "infinitiv": ["flyta"],
+        "presens": ["flyter"],
+        "preteritum": ["flöt"],
+        "supinum": ["flutit"],
+        "imperativum": ["flyt"]
+      },
+      {
+        "english": ["freeze"],
+        "infinitiv": ["frysa"],
+        "presens": ["fryser"],
+        "preteritum": ["frös"],
+        "supinum": ["frusit"],
+        "imperativum": ["frys"]
+      },
+      {
+        "english": ["get"],
+        "infinitiv": ["få"],
+        "presens": ["får"],
+        "preteritum": ["fick"],
+        "supinum": ["fått"],
+        "imperativum": ["få"]
+      },
+      {
+        "english": ["disappear"],
+        "infinitiv": ["försvinna"],
+        "presens": ["försvinner"],
+        "preteritum": ["försvann"],
+        "supinum": ["försvunnit"],
+        "imperativum": ["försvinn"]
+      },
+      {
+        "english": ["give"],
+        "infinitiv": ["ge", "giva"],
+        "presens": ["ger", "giver"],
+        "preteritum": ["gav"],
+        "supinum": ["gett", "givit"],
+        "imperativum": ["ge"]
+      },
+      {
+        "english": ["cast"],
+        "infinitiv": ["gjuta"],
+        "presens": ["gjuter"],
+        "preteritum": ["göt"],
+        "supinum": ["gjutit"],
+        "imperativum": ["gjut"]
+      },
+      {
+        "english": ["glide"],
+        "infinitiv": ["glida"],
+        "presens": ["glider"],
+        "preteritum": ["gled"],
+        "supinum": ["glidit"],
+        "imperativum": ["glid"]
+      },
+      {
+        "english": ["please", "delight"],
+        "infinitiv": ["glädja"],
+        "presens": ["gläd(j)er"],
+        "preteritum": ["gladde"],
+        "supinum": ["glatt"],
+        "imperativum": ["gläd"]
+      },
+      {
+        "english": ["scrape", "rub"],
+        "infinitiv": ["gnida"],
+        "presens": ["gnider"],
+        "preteritum": ["gned"],
+        "supinum": ["gnidit"],
+        "imperativum": ["gnid"]
+      },
+      {
+        "english": ["grip"],
+        "infinitiv": ["gripa"],
+        "presens": ["griper"],
+        "preteritum": ["grep"],
+        "supinum": ["gripit"],
+        "imperativum": ["grip"]
+      },
+      {
+        "english": ["cry"],
+        "infinitiv": ["gråta"],
+        "presens": ["gråter"],
+        "preteritum": ["grät"],
+        "supinum": ["gråtit"],
+        "imperativum": ["gråt"]
+      },
+      {
+        "english": ["go", "walk"],
+        "infinitiv": ["gå"],
+        "presens": ["går"],
+        "preteritum": ["gick"],
+        "supinum": ["gått"],
+        "imperativum": ["gå"]
+      },
+      {
+        "english": ["do"],
+        "infinitiv": ["göra"],
+        "presens": ["gör"],
+        "preteritum": ["gjorde"],
+        "supinum": ["gjort"],
+        "imperativum": ["gör"]
+      },
+      {
+        "english": ["have"],
+        "infinitiv": ["ha"],
+        "presens": ["har"],
+        "preteritum": ["hade"],
+        "supinum": ["haft"],
+        "imperativum": ["ha"]
+      },
+      {
+        "english": ["be called"],
+        "infinitiv": ["heta"],
+        "presens": ["heter"],
+        "preteritum": ["hette"],
+        "supinum": ["hetat"],
+        "imperativum": ["het"]
+      },
+      {
+        "english": ["make in time"],
+        "infinitiv": ["hinna"],
+        "presens": ["hinner"],
+        "preteritum": ["hann"],
+        "supinum": ["hunnit"],
+        "imperativum": ["hinn"]
+      },
+      {
+        "english": ["chop", "slash"],
+        "infinitiv": ["hugga"],
+        "presens": ["hugger"],
+        "preteritum": ["högg"],
+        "supinum": ["huggit"],
+        "imperativum": ["hugg"]
+      },
+      {
+        "english": ["hold"],
+        "infinitiv": ["hålla"],
+        "presens": ["håller"],
+        "preteritum": ["höll"],
+        "supinum": ["hållit"],
+        "imperativum": ["håll"]
+      },
+      {
+        "english": ["stride", "climb"],
+        "infinitiv": ["kliva"],
+        "presens": ["kliver"],
+        "preteritum": ["klev"],
+        "supinum": ["klivit"],
+        "imperativum": ["kliv"]
+      },
+      {
+        "english": ["pinch"],
+        "infinitiv": ["knipa"],
+        "presens": ["kniper"],
+        "preteritum": ["knep"],
+        "supinum": ["knipit"],
+        "imperativum": ["knip"]
+      },
+      {
+        "english": ["tie"],
+        "infinitiv": ["knyta"],
+        "presens": ["knyter"],
+        "preteritum": ["knöt"],
+        "supinum": ["knutit"],
+        "imperativum": ["knyt"]
+      },
+      {
+        "english": ["come"],
+        "infinitiv": ["komma"],
+        "presens": ["kommer"],
+        "preteritum": ["kom"],
+        "supinum": ["kommit"],
+        "imperativum": ["kom"]
+      },
+      {
+        "english": ["crawl"],
+        "infinitiv": ["krypa"],
+        "presens": ["kryper"],
+        "preteritum": ["kröp"],
+        "supinum": ["krupit"],
+        "imperativum": ["kryp"]
+      },
+      {
+        "english": ["know", "be able to"],
+        "infinitiv": ["kunna"],
+        "presens": ["kan"],
+        "preteritum": ["kunde"],
+        "supinum": ["kunnat"]
+      },
+      {
+        "english": ["smile"],
+        "infinitiv": ["le"],
+        "presens": ["ler"],
+        "preteritum": ["log"],
+        "supinum": ["lett"],
+        "imperativum": ["le"]
+      },
+      {
+        "english": ["suffer"],
+        "infinitiv": ["lida"],
+        "presens": ["lider"],
+        "preteritum": ["led"],
+        "supinum": ["lidit"],
+        "imperativum": ["lid"]
+      },
+      {
+        "english": ["lie"],
+        "infinitiv": ["ligga"],
+        "presens": ["ligger"],
+        "preteritum": ["låg"],
+        "supinum": ["legat"],
+        "imperativum": ["ligg"]
+      },
+      {
+        "english": ["lie"],
+        "infinitiv": ["ljuga"],
+        "presens": ["ljuger"],
+        "preteritum": ["ljög"],
+        "supinum": ["ljugit"],
+        "imperativum": ["ljug"]
+      },
+      {
+        "english": ["obey"],
+        "infinitiv": ["lyda"],
+        "presens": ["lyder"],
+        "preteritum": ["löd", "lydde"],
+        "supinum": ["lytt"],
+        "imperativum": ["lyd"]
+      },
+      {
+        "english": ["let"],
+        "infinitiv": ["låta"],
+        "presens": ["låter"],
+        "preteritum": ["lät"],
+        "supinum": ["låtit"],
+        "imperativum": ["låt"]
+      },
+      {
+        "english": ["lay"],
+        "infinitiv": ["lägga"],
+        "presens": ["lägger"],
+        "preteritum": ["lade"],
+        "supinum": ["lagt"],
+        "imperativum": ["lägg"]
+      },
+      {
+        "english": ["must"],
+        "infinitiv": ["måsta"],
+        "presens": ["måste"],
+        "preteritum": ["måste"],
+        "supinum": ["måst"]
+      },
+      {
+        "english": ["curtsey"],
+        "infinitiv": ["niga"],
+        "presens": ["niger"],
+        "preteritum": ["neg"],
+        "supinum": ["nigit"],
+        "imperativum": ["nig"]
+      },
+      {
+        "english": ["enjoy"],
+        "infinitiv": ["njuta"],
+        "presens": ["njuter"],
+        "preteritum": ["njöt"],
+        "supinum": ["njutit"],
+        "imperativum": ["njut"]
+      },
+      {
+        "english": ["pinch"],
+        "infinitiv": ["nypa"],
+        "presens": ["nyper"],
+        "preteritum": ["nöp"],
+        "supinum": ["nypt"],
+        "imperativum": ["nyp"]
+      },
+      {
+        "english": ["sneeze"],
+        "infinitiv": ["nysa"],
+        "presens": ["nyser"],
+        "preteritum": ["nös", "nyste"],
+        "supinum": ["nysit", "nyst"],
+        "imperativum": ["nys"]
+      },
+      {
+        "english": ["beep", "squeak"],
+        "infinitiv": ["pipa"],
+        "presens": ["piper"],
+        "preteritum": ["pep"],
+        "supinum": ["pipit"],
+        "imperativum": ["pip"]
+      },
+      {
+        "english": ["ride"],
+        "infinitiv": ["rida"],
+        "presens": ["rider"],
+        "preteritum": ["red"],
+        "supinum": ["ridit"],
+        "imperativum": ["rid"]
+      },
+      {
+        "english": ["run", "flow"],
+        "infinitiv": ["rinna"],
+        "presens": ["rinner"],
+        "preteritum": ["rann"],
+        "supinum": ["runnit"],
+        "imperativum": ["rinn"]
+      },
+      {
+        "english": ["scratch hard"],
+        "infinitiv": ["riva"],
+        "presens": ["river"],
+        "preteritum": ["rev"],
+        "supinum": ["rivit"],
+        "imperativum": ["riv"]
+      },
+      {
+        "english": ["shiver"],
+        "infinitiv": ["rysa"],
+        "presens": ["ryser"],
+        "preteritum": ["rös"],
+        "supinum": ["ryst"],
+        "imperativum": ["rys"]
+      },
+      {
+        "english": ["roar"],
+        "infinitiv": ["ryta"],
+        "presens": ["ryter"],
+        "preteritum": ["röt"],
+        "supinum": ["rutit"],
+        "imperativum": ["ryt"]
+      },
+      {
+        "english": ["see"],
+        "infinitiv": ["se"],
+        "presens": ["ser"],
+        "preteritum": ["såg"],
+        "supinum": ["sett"],
+        "imperativum": ["se"]
+      },
+      {
+        "english": ["swim"],
+        "infinitiv": ["simma"],
+        "presens": ["simmer", "simmar"],
+        "preteritum": ["sam", "simmade"],
+        "supinum": ["summit", "simmat"],
+        "imperativum": ["sim", "simma"]
+      },
+      {
+        "english": ["sit"],
+        "infinitiv": ["sitta"],
+        "presens": ["sitter"],
+        "preteritum": ["satt"],
+        "supinum": ["suttit"],
+        "imperativum": ["sitt"]
+      },
+      {
+        "english": ["sing"],
+        "infinitiv": ["sjunga"],
+        "presens": ["sjunger"],
+        "preteritum": ["sjöng"],
+        "supinum": ["sjungit"],
+        "imperativum": ["sjung"]
+      },
+      {
+        "english": ["boil", "seethe", "simmer"],
+        "infinitiv": ["sjuda"],
+        "presens": ["sjuder"],
+        "preteritum": ["sjöd"],
+        "supinum": ["sjudit"],
+        "imperativum": ["sjud"]
+      },
+      {
+        "english": ["sink"],
+        "infinitiv": ["sjunka"],
+        "presens": ["sjunker"],
+        "preteritum": ["sjönk"],
+        "supinum": ["sjunkit"],
+        "imperativum": ["sjunk"]
+      },
+      {
+        "english": ["shine"],
+        "infinitiv": ["skina"],
+        "presens": ["skiner"],
+        "preteritum": ["sken"],
+        "supinum": ["skinit"],
+        "imperativum": ["skin"]
+      },
+      {
+        "english": ["shoot"],
+        "infinitiv": ["skjuta"],
+        "presens": ["skjuter"],
+        "preteritum": ["sköt"],
+        "supinum": ["skjutit"],
+        "imperativum": ["skjut"]
+      },
+      {
+        "english": ["will", "shall"],
+        "infinitiv": ["skola"],
+        "presens": ["ska"],
+        "preteritum": ["skulle"],
+        "supinum": ["skolat"]
+      },
+      {
+        "english": ["glide", "stride", "proceed", "advance"],
+        "infinitiv": ["skrida"],
+        "presens": ["skrider"],
+        "preteritum": ["skred"],
+        "supinum": ["skridit"],
+        "imperativum": ["skrid"]
+      },
+      {
+        "english": ["scream"],
+        "infinitiv": ["skrika"],
+        "presens": ["skriker"],
+        "preteritum": ["skrek"],
+        "supinum": ["skrikit"],
+        "imperativum": ["skrik"]
+      },
+      {
+        "english": ["write"],
+        "infinitiv": ["skriva"],
+        "presens": ["skriver"],
+        "preteritum": ["skrev"],
+        "supinum": ["skrivit"],
+        "imperativum": ["skriv"]
+      },
+      {
+        "english": ["brag"],
+        "infinitiv": ["skryta"],
+        "presens": ["skryter"],
+        "preteritum": ["skröt"],
+        "supinum": ["skrutit"],
+        "imperativum": ["skryt"]
+      },
+      {
+        "english": ["cut"],
+        "infinitiv": ["skära"],
+        "presens": ["skär"],
+        "preteritum": ["skar"],
+        "supinum": ["skurit"],
+        "imperativum": ["skär"]
+      },
+      {
+        "english": ["be excused from", "avoid"],
+        "infinitiv": ["slippa"],
+        "presens": ["slipper"],
+        "preteritum": ["slapp"],
+        "supinum": ["sluppit"],
+        "imperativum": ["slipp"]
+      },
+      {
+        "english": ["tear"],
+        "infinitiv": ["slita"],
+        "presens": ["sliter"],
+        "preteritum": ["slet"],
+        "supinum": ["slitit"],
+        "imperativum": ["slit"]
+      },
+      {
+        "english": ["punch"],
+        "infinitiv": ["slå"],
+        "presens": ["slår"],
+        "preteritum": ["slog"],
+        "supinum": ["slagit"],
+        "imperativum": ["slå"]
+      },
+      {
+        "english": ["fight"],
+        "infinitiv": ["slåss"],
+        "presens": ["slåss"],
+        "preteritum": ["slogs"],
+        "supinum": ["slagits"],
+        "imperativum": ["slåss"]
+      },
+      {
+        "english": ["sneak"],
+        "infinitiv": ["smyga"],
+        "presens": ["smyger"],
+        "preteritum": ["smög"],
+        "supinum": ["smugit"],
+        "imperativum": ["smyg"]
+      },
+      {
+        "english": ["melt"],
+        "infinitiv": ["smälta"],
+        "presens": ["smälter"],
+        "preteritum": ["smälte", "smalt"],
+        "supinum": ["smält"],
+        "imperativum": ["smält"]
+      },
+      {
+        "english": ["blow one’s nose"],
+        "infinitiv": ["snyta"],
+        "presens": ["snyter"],
+        "preteritum": ["snöt"],
+        "supinum": ["snutit"],
+        "imperativum": ["snyt"]
+      },
+      {
+        "english": ["sleep"],
+        "infinitiv": ["sova"],
+        "presens": ["sover"],
+        "preteritum": ["sov"],
+        "supinum": ["sovit"],
+        "imperativum": ["sov"]
+      },
+      {
+        "english": ["spin", "purr"],
+        "infinitiv": ["spinna"],
+        "presens": ["spinner"],
+        "preteritum": ["spann"],
+        "supinum": ["spunnit"],
+        "imperativum": ["spinn"]
+      },
+      {
+        "english": ["crack"],
+        "infinitiv": ["spricka"],
+        "presens": ["spricker"],
+        "preteritum": ["sprack"],
+        "supinum": ["spruckit"],
+        "imperativum": ["sprick"]
+      },
+      {
+        "english": ["spread"],
+        "infinitiv": ["sprida"],
+        "presens": ["sprider"],
+        "preteritum": ["spred", "spridde"],
+        "supinum": ["spridit", "spritt"],
+        "imperativum": ["sprid"]
+      },
+      {
+        "english": ["run"],
+        "infinitiv": ["springa"],
+        "presens": ["springer"],
+        "preteritum": ["sprang"],
+        "supinum": ["sprungit"],
+        "imperativum": ["spring"]
+      },
+      {
+        "english": ["sting, stick"],
+        "infinitiv": ["sticka"],
+        "presens": ["sticker"],
+        "preteritum": ["stack"],
+        "supinum": ["stuckit"],
+        "imperativum": ["stick"]
+      },
+      {
+        "english": ["arise", "step"],
+        "infinitiv": ["stiga"],
+        "presens": ["stiger"],
+        "preteritum": ["steg"],
+        "supinum": ["stigit"],
+        "imperativum": ["stig"]
+      },
+      {
+        "english": ["stink"],
+        "infinitiv": ["stinka"],
+        "presens": ["stinker"],
+        "preteritum": ["stank"],
+        "supinum": ["stunkit"],
+        "imperativum": ["stink"]
+      },
+      {
+        "english": ["steal"],
+        "infinitiv": ["stjäla"],
+        "presens": ["stjäl"],
+        "preteritum": ["stal"],
+        "supinum": ["stulit"],
+        "imperativum": ["stjäl"]
+      },
+      {
+        "english": ["battle"],
+        "infinitiv": ["strida"],
+        "presens": ["strider"],
+        "preteritum": ["stred"],
+        "supinum": ["stridit"],
+        "imperativum": ["strid"]
+      },
+      {
+        "english": ["stroke", "rub"],
+        "infinitiv": ["stryka"],
+        "presens": ["stryker"],
+        "preteritum": ["strök"],
+        "supinum": ["strukit"],
+        "imperativum": ["stryk"]
+      },
+      {
+        "english": ["stand"],
+        "infinitiv": ["stå"],
+        "presens": ["står"],
+        "preteritum": ["stod"],
+        "supinum": ["stått"],
+        "imperativum": ["stå"]
+      },
+      {
+        "english": ["suck"],
+        "infinitiv": ["suga"],
+        "presens": ["suger"],
+        "preteritum": ["sög"],
+        "supinum": ["sugit"],
+        "imperativum": ["sug"]
+      },
+      {
+        "english": ["drink alcohol"],
+        "infinitiv": ["supa"],
+        "presens": ["super"],
+        "preteritum": ["söp"],
+        "supinum": ["supit"],
+        "imperativum": ["sup"]
+      },
+      {
+        "english": ["smart", "sting"],
+        "infinitiv": ["svida"],
+        "presens": ["svider"],
+        "preteritum": ["sved"],
+        "supinum": ["svidit"],
+        "imperativum": ["svid"]
+      },
+      {
+        "english": ["let down", "fail"],
+        "infinitiv": ["svika"],
+        "presens": ["sviker"],
+        "preteritum": ["svek"],
+        "supinum": ["svikit"],
+        "imperativum": ["svik"]
+      },
+      {
+        "english": ["starve"],
+        "infinitiv": ["svälta"],
+        "presens": ["svälter"],
+        "preteritum": ["svalt", "svälte"],
+        "supinum": ["svultit", "svält"],
+        "imperativum": ["svält"]
+      },
+      {
+        "english": ["swear"],
+        "infinitiv": ["svära"],
+        "presens": ["svär"],
+        "preteritum": ["svor"],
+        "supinum": ["svurit"],
+        "imperativum": ["svär"]
+      },
+      {
+        "english": ["take"],
+        "infinitiv": ["ta"],
+        "presens": ["tar"],
+        "preteritum": ["tog"],
+        "supinum": ["tagit"],
+        "imperativum": ["ta"]
+      },
+      {
+        "english": ["keep silent"],
+        "infinitiv": ["tiga"],
+        "presens": ["tiger"],
+        "preteritum": ["teg"],
+        "supinum": ["tigit"],
+        "imperativum": ["tig"]
+      },
+      {
+        "english": ["yell", "shriek"],
+        "infinitiv": ["tjuta"],
+        "presens": ["tjuter"],
+        "preteritum": ["tjöt"],
+        "supinum": ["tjutit"],
+        "imperativum": ["tjut"]
+      },
+      {
+        "english": ["force", "compel"],
+        "infinitiv": ["tvinga"],
+        "presens": ["tvinger", "tvingar"],
+        "preteritum": ["tvang", "tvingade"],
+        "supinum": ["tvungit", "tvingat"],
+        "imperativum": ["tving", "tvinga"]
+      },
+      {
+        "english": ["be"],
+        "infinitiv": ["vara"],
+        "presens": ["är"],
+        "preteritum": ["var"],
+        "supinum": ["varit"],
+        "imperativum": ["var"]
+      },
+      {
+        "english": ["know"],
+        "infinitiv": ["veta"],
+        "presens": ["vet"],
+        "preteritum": ["visste"],
+        "supinum": ["vetat"]
+      },
+      {
+        "english": ["fold", "yield"],
+        "infinitiv": ["vika"],
+        "presens": ["viker"],
+        "preteritum": ["vek", "vikte"],
+        "supinum": ["vikit", "vikt"],
+        "imperativum": ["vik"]
+      },
+      {
+        "english": ["want"],
+        "infinitiv": ["vilja"],
+        "presens": ["vill"],
+        "preteritum": ["ville"],
+        "supinum": ["velat"]
+      },
+      {
+        "english": ["win"],
+        "infinitiv": ["vinna"],
+        "presens": ["vinner"],
+        "preteritum": ["vann"],
+        "supinum": ["vunnit"],
+        "imperativum": ["vinn"]
+      },
+      {
+        "english": ["turn"],
+        "infinitiv": ["vrida"],
+        "presens": ["vrider"],
+        "preteritum": ["vred"],
+        "supinum": ["vridit"],
+        "imperativum": ["vrid"]
+      },
+      {
+        "english": ["adapt", "accustom"],
+        "infinitiv": ["vänja"],
+        "presens": ["vänjer"],
+        "preteritum": ["vande", "vänjde"],
+        "supinum": ["vant", "vänjt"],
+        "imperativum": ["vänj"]
+      },
+      {
+        "english": ["grow"],
+        "infinitiv": ["växa"],
+        "presens": ["växer"],
+        "preteritum": ["växte"],
+        "supinum": ["växt", "vuxit"],
+        "imperativum": ["väx"]
+      },
+      {
+        "english": ["eat"],
+        "infinitiv": ["äta"],
+        "presens": ["äter"],
+        "preteritum": ["åt"],
+        "supinum": ["ätit"],
+        "imperativum": ["ät"]
+      }
+    ]
+  }
+]

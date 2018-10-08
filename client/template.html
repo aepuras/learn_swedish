@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <title>verbs</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll-probe.min.js"></script>
+        <script language="javascript">
+                var scrollQuestions, scrollAnswers;
+                function loaded() {
+                    var options = {
+                        scrollX: true,
+                        scrollY: false,
+                        bounce: true,
+                        snap: false,
+                        mouseWheel: true,
+                        tap: true
+                    };
+                    scrollQuestions = new IScroll("#scroll-questions-wrapper", options);
+                    scrollAnswers = new IScroll("#scroll-answers-wrapper", options);
+
+                    document.querySelectorAll('li').forEach(function(element) { 
+                        element.addEventListener('tap', function () {
+                            this.classList.add("selected");
+                            this.parentNode.querySelectorAll("li").forEach(function(sibling) {
+                                sibling !== this && sibling.classList.remove("selected");
+                            }, this);
+                        }, false);
+                    });
+                }
+
+                function isPassive() {
+                    var supportsPassiveOption = false;
+                    try {
+                        addEventListener("test", null, Object.defineProperty({}, 'passive', {
+                            get: function () {
+                                supportsPassiveOption = true;
+                            }
+                        }));
+                    } catch(e) {}
+                    return supportsPassiveOption;
+                }
+
+                document.addEventListener('touchmove', function (e) { e.preventDefault(); }, isPassive() ? {
+                    capture: false,
+                    passive: false
+                } : false);
+            </script>
+        <style type="text/css">
+            * {
+                box-sizing: border-box;
+            }
+
+            html {
+                -ms-touch-action: none;
+            }
+            body {
+                background-color: #0070AF;
+                padding: 10px;
+                font-family: sans-serif;
+                color: #FFFFFF;
+                font-size: 25px;
+            }
+            .topNav {
+                color: #ffffff;
+                display: flex;
+                background-color: #0083c5;
+                border-radius: 0.5em;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                overflow: hidden;
+            }
+            .topNav div {
+                padding: 14px;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                flex: 1;
+            }
+            .topNav div.active {
+                background-color: #FFCA08;
+                color: #0070AF;
+            }
+            .settings {
+                color: #ffffff;
+                display: flex;
+                flex-direction: column;
+                background-color: #FFCA08;
+                border-radius: 0.5em;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                margin-top: 15px;
+            }
+            .settings > div {
+                padding: 14px;
+                display: flex;
+                align-content: center;
+                flex: 1;
+            }
+            .settings > div.title {
+                color: #0070AF;
+                margin-left: 20px;
+                padding: 5px;
+            }
+            .item {
+                position: relative;
+                background-color: #0083c5;
+            }
+
+            .scroller-wrapper {
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .scroller {
+                user-select: none;
+                transform: translateZ(0);
+                width: 778px;
+                text-size-adjust: none;
+            }
+            .scroller ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+
+            .scroller li {
+                display: block;
+                float: left;
+                padding: 10px;
+                height: 100%;
+            }
+
+            .scroller li.selected {
+                background-color: #FFCA08;
+                color: #0070AF;
+            }
+
+            .game {
+                color: #ffffff;
+                display: flex;
+                background-color: #0083c5;
+                border-radius: 0.5em;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                margin-top: 15px;
+                padding: 14px;
+            }
+
+            .question {
+                flex: 1;
+                color: #FFFFFF;
+                font-style: italic;
+                font-weight: bold;
+            }
+
+            .answer {
+                flex: 1;
+            }
+
+            .answer > input {
+                border: none;
+                border-bottom: solid 2px #0070AF;
+                background-color: rgb(152, 186, 202);
+                transition: border 0.3s;
+                width: 100%;
+                padding: 5px;
+                font-size: 20px;
+            }
+
+            .answer > input:focus {
+                outline: none;
+            }
+
+            .gradient_start {
+                position: absolute;
+                top: 0px;
+                background-color: #0070af;
+                height: 100%;
+                left: 14px;
+                width: 50px;
+                background: linear-gradient(to left, rgba(255, 0, 0, 0), #0083c5);
+                z-index: 1;
+            }
+
+            .gradient_end {
+                position: relative;
+            }
+
+            .gradient_end > div {
+                position: absolute;
+                top: 0px;
+                background-color: #0070af;
+                height: 100%;
+                left: -50px;
+                width: 50px;
+                background: linear-gradient(to right, rgba(255, 0, 0, 0), #0083c5);
+                z-index: 1;
+            }
+
+            .footer {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .stats {
+                display: flex;
+                align-content: center;
+            }
+
+            .stats > div {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                margin-top: 15px;
+                margin-bottom: 8px;
+            }
+
+            .stats > div > div {
+                background-color: #dae9f1;
+                border-radius: 1em;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                margin-right: 10px;
+                width: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #70c570;
+            }
+
+            .stats > div > div:first-child {
+                color: #f77070;
+            }
+
+            .buttons {
+                flex: 1;
+                margin-top: 15px;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .buttons > div {
+                color: #ffffff;
+                background-color: #0083c5;
+                border-radius: 0.5em;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                padding: 14px;
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+    <body onload="loaded()">
+        <div id="container">
+            <div class="topNav">
+                <div class="active">Common</div>
+                <div>Irregular</div>
+            </div>
+            <div class="settings">
+                <div class="title">Question</div>
+                <div class="item">
+                    <div class="gradient_start"></div>
+                    <div id="scroll-questions-wrapper" class="scroller-wrapper">
+                        <div class="scroller">
+                            <ul id="questions-list">
+                                <li>English</li>
+                                <li>Infinitiv</li>
+                                <li>Presens</li>
+                                <li>Preteritum</li>
+                                <li>Supinum</li>
+                                <li>Imperativum</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="gradient_end"><div></div></div>
+                </div>
+            </div>
+            <div class="settings">
+                <div class="title">Answer</div>
+                <div class="item">
+                    <div class="gradient_start"></div>
+                    <div id="scroll-answers-wrapper" class="scroller-wrapper">
+                        <div class="scroller">
+                            <ul>
+                                <li>English</li>
+                                <li>Infinitiv</li>
+                                <li>Presens</li>
+                                <li>Preteritum</li>
+                                <li>Supinum</li>
+                                <li>Imperativum</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="gradient_end"><div></div></div>
+                </div>
+            </div>
+            <div>
+                <div class="game">
+                    <div class="question">Uttalar</div>
+                    <div class="answer"><input type="text" placeholder=":answer"/></div>
+                </div>
+                <div class="footer">
+                    <div class="stats">
+                        <div>
+                            <div>4</div>
+                            <div>16</div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <div>Reset</div>
+                        <div>Verify</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
