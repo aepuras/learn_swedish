@@ -1,3 +1,4 @@
-# xpens
+# learn_swedish
 
-simple app built with react/node/express/mongo that just displays grouped monthly expenses
+yarn install
+yarn start
