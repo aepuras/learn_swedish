@@ -2,10 +2,12 @@
   "name": "verbs",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "devDependencies": {
     "react-scripts": "1.0.14"
   },
   "dependencies": {
+    "axios-es6": "^0.11.1",
     "classnames": "^2.2.5",
     "iscroll": "^5.2.0",
     "react": "^16.0.0",

@@ -39,16 +39,22 @@ class Game extends Component {
                 this.props.tests[tstIndex].questions
             ),
             noOfWrongs: 0,
-            noOfRights: 0
+            noOfRights: 0,
+            showAnswer: false,
+            showWrong: false,
+            answer: ""
         });
     };
 
-    componentDidMount() {
-        this.toggleGame();
-    }
-
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.tests !== this.props.tests) {
+        // if (prevProps.tests.length === 0 && this.props.tests.lenth > 0) {
+        //     this.toggleGame();
+        // }
+        if (
+            this.props.tests &&
+            prevProps.tests !== this.props.tests &&
+            this.props.tests.length > 0
+        ) {
             this.restartGame(true);
         }
     }

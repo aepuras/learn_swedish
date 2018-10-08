@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios-es6";
 import classnames from "classnames";
 import data from "../data/verbs";
 import Settings from "../components/Settings";
@@ -14,12 +15,7 @@ class Verbs extends React.Component {
         this.state = {
             currentQuestion: CURRENT_QUESTION,
             currentAnswer: CURRENT_ANSWER,
-            tests: data[0].items.map(item => {
-                return {
-                    questions: item[CURRENT_QUESTION],
-                    answers: item[CURRENT_ANSWER]
-                };
-            }),
+            tests: this.getTests(CURRENT_QUESTION, CURRENT_ANSWER, true),
             commonVerbs: true
         };
         this.settings = Object.getOwnPropertyNames(data[0].items[0]);
@@ -60,13 +56,20 @@ class Verbs extends React.Component {
     };
 
     getTests = (question, answer, commonVerbs) => {
-        const verbSetIndex = commonVerbs ? 0 : 1;
-        return data[verbSetIndex].items.map(item => {
-            return {
-                questions: item[question],
-                answers: item[answer]
-            };
-        });
+        axios
+            .get(`/openapi/verbs/${commonVerbs ? "common" : "irregular"}`, {})
+            .then(
+                function(response) {
+                    this.setState({
+                        tests: response.data.map(item => {
+                            return {
+                                questions: item[question],
+                                answers: item[answer]
+                            };
+                        })
+                    });
+                }.bind(this)
+            );
     };
 
     render() {

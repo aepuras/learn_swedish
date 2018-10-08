@@ -17,6 +17,18 @@ router.get("/verbs", (req, res) => {
     });
 });
 
+router.get("/verbs/:setName", (req, res) => {
+    VerbsSet.find({ name: req.params.setName }, (userErr, verbsSet) => {
+        if (userErr || !verbsSet) {
+            res.status(401).json({
+                error: "No verbs"
+            });
+        } else {
+            res.status(200).json(verbsSet[0].items);
+        }
+    });
+});
+
 router.get("/words", (req, res) => {
     Word.find({}, (userErr, words) => {
         if (userErr || !words) {

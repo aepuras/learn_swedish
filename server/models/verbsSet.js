@@ -7,12 +7,12 @@ const VerbsSetSchema = new mongoose.Schema({
 	},
 	items: [
 		{
-			english: String,
-			infinitiv: String,
-			presens: String,
-			preteritum: String,
-			supinum: String,
-			imperativum: String
+			english: [String],
+			infinitiv: [String],
+			presens: [String],
+			preteritum: [String],
+			supinum: [String],
+			imperativum: [String]
 		}
 	]
 });
