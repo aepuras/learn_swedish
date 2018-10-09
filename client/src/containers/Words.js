@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios-es6";
-import classnames from "classnames";
 import Game from "../components/Game";
-import data from "../data/words";
+import AddWord from "../components/AddWord";
 
 class Words extends React.Component {
     constructor(props) {
@@ -27,8 +26,17 @@ class Words extends React.Component {
         );
     }
 
+    addWord = word => {
+        axios.post("/openapi/words", word);
+    };
+
     render() {
-        return <Game tests={this.state.tests} />;
+        return (
+            <div>
+                <Game tests={this.state.tests} />
+                <AddWord callback={this.addWord} />
+            </div>
+        );
     }
 }
 

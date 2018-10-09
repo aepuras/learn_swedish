@@ -4,6 +4,10 @@ import "../App.css";
 import "./Setting.css";
 
 class Setting extends Component {
+	choose = () => {
+		!this.props.disabled && this.props.choose();
+	};
+
 	render() {
 		return (
 			<li
@@ -11,9 +15,7 @@ class Setting extends Component {
 					{ selected: !!this.props.selected },
 					{ disabled: !!this.props.disabled }
 				)}
-				onClick={() => {
-					!this.props.disabled ? this.props.choose() : false;
-				}}
+				onClick={this.choose}
 			>
 				{this.props.setting}
 			</li>

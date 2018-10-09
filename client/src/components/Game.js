@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Icon from "./Icon.js";
-import { ICONS } from "../constants.js";
 import classnames from "classnames";
 import "../App.css";
 import "./Game.css";
@@ -47,15 +45,15 @@ class Game extends Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
-        // if (prevProps.tests.length === 0 && this.props.tests.lenth > 0) {
-        //     this.toggleGame();
-        // }
         if (
             this.props.tests &&
+            prevProps.tests &&
             prevProps.tests !== this.props.tests &&
             this.props.tests.length > 0
         ) {
-            this.restartGame(true);
+            const changeIndex =
+                prevProps.tests.length !== this.props.tests.length;
+            this.restartGame(changeIndex);
         }
     }
 
@@ -168,8 +166,12 @@ class Game extends Component {
                         </div>
                     </div>
                     <div className="buttons">
-                        <div onClick={this.toggleGame}>Reset</div>
-                        <div onClick={this.checkAnswer}>Verify</div>
+                        <div className="button" onClick={this.toggleGame}>
+                            Reset
+                        </div>
+                        <div className="button" onClick={this.checkAnswer}>
+                            Verify
+                        </div>
                     </div>
                 </div>
             </div>

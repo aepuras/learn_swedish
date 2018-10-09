@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios-es6";
-import classnames from "classnames";
 import data from "../data/verbs";
 import Settings from "../components/Settings";
 import Game from "../components/Game";
@@ -15,47 +14,51 @@ class Verbs extends React.Component {
         this.state = {
             currentQuestion: CURRENT_QUESTION,
             currentAnswer: CURRENT_ANSWER,
-            tests: this.getTests(CURRENT_QUESTION, CURRENT_ANSWER, true),
+            tests: [],
             commonVerbs: true
         };
         this.settings = Object.getOwnPropertyNames(data[0].items[0]);
     }
 
+    componentDidMount() {
+        this.setTests(CURRENT_QUESTION, CURRENT_ANSWER, true);
+    }
+
     chooseQuestion = question => {
         this.setState({
-            currentQuestion: question,
-            tests: this.getTests(
-                question,
-                this.state.currentAnswer,
-                this.state.commonVerbs
-            )
+            currentQuestion: question
         });
+        this.setTests(
+            question,
+            this.state.currentAnswer,
+            this.state.commonVerbs
+        );
     };
 
     chooseAnswer = answer => {
         this.setState({
-            currentAnswer: answer,
-            tests: this.getTests(
-                this.state.currentQuestion,
-                answer,
-                this.state.commonVerbs
-            )
+            currentAnswer: answer
         });
+        this.setTests(
+            this.state.currentQuestion,
+            answer,
+            this.state.commonVerbs
+        );
     };
 
     toggleVerbsSet = () => {
         const commonVerbs = !this.state.commonVerbs;
         this.setState({
-            commonVerbs: commonVerbs,
-            tests: this.getTests(
-                this.state.currentQuestion,
-                this.state.currentAnswer,
-                commonVerbs
-            )
+            commonVerbs: commonVerbs
         });
+        this.setTests(
+            this.state.currentQuestion,
+            this.state.currentAnswer,
+            commonVerbs
+        );
     };
 
-    getTests = (question, answer, commonVerbs) => {
+    setTests = (question, answer, commonVerbs) => {
         axios
             .get(`/openapi/verbs/${commonVerbs ? "common" : "irregular"}`, {})
             .then(

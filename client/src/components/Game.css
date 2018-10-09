@@ -83,13 +83,3 @@
     display: flex;
     justify-content: flex-end;
 }
-
-.buttons > div {
-    color: #ffffff;
-    background-color: #0083c5;
-    border-radius: 0.5em;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    padding: 14px;
-    margin-left: 10px;
-}
