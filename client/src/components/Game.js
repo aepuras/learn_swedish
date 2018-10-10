@@ -91,7 +91,7 @@ class Game extends Component {
     checkAnswer = () => {
         let test = this.props.tests[this.state.testIndex];
         this.setState({ showWrong: false });
-        if (test.answers.includes(this.state.answer)) {
+        if (test.answers.includes(this.state.answer.toLowerCase().trim())) {
             let currentIndex = this.state.testIndex;
             let nextIndex =
                 currentIndex >= this.props.tests.length - 1
