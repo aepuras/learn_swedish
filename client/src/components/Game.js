@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import classnames from "classnames";
+import Icon from "./Icon";
+import { ICONS } from "../constants.js";
 import "../App.css";
 import "./Game.css";
 
@@ -15,7 +17,8 @@ class Game extends Component {
             showWrong: false,
             question: "",
             noOfWrongs: 0,
-            noOfRights: 0
+            noOfRights: 0,
+            shuffle: false
         };
     }
 
@@ -41,6 +44,12 @@ class Game extends Component {
             showAnswer: false,
             showWrong: false,
             answer: ""
+        });
+    };
+
+    toggleShuffle = () => {
+        this.setState({
+            shuffle: !this.state.shuffle
         });
     };
 
@@ -73,19 +82,37 @@ class Game extends Component {
         return this.randomArrayItem(hints);
     };
 
-    randomArrayIndex = arr => {
-        let randomIndex = 0;
-        if (arr.length > 1) {
-            randomIndex = Math.floor(Math.random() * arr.length);
+    randomNumber = (max, current) => {
+        let rnd = 0;
+        if (max > 1) {
+            rnd = Math.floor(Math.random() * max);
+            if (current) {
+                while (current === rnd) {
+                    rnd = Math.floor(Math.random() * max);
+                }
+            }
         }
-        return randomIndex;
+        return rnd;
     };
     randomArrayItem = arr => {
-        return arr[this.randomArrayIndex(arr)];
+        return arr[this.randomNumber(arr.length)];
     };
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
+    };
+
+    getNextIndex = () => {
+        let nextIndex =
+            this.state.testIndex >= this.props.tests.length - 1
+                ? 0
+                : this.state.testIndex + 1;
+        this.state.shuffle &&
+            (nextIndex = this.randomNumber(
+                this.props.tests.length,
+                this.state.testIndex
+            ));
+        return nextIndex;
     };
 
     checkAnswer = () => {
@@ -93,10 +120,7 @@ class Game extends Component {
         this.setState({ showWrong: false });
         if (test.answers.includes(this.state.answer.toLowerCase().trim())) {
             let currentIndex = this.state.testIndex;
-            let nextIndex =
-                currentIndex >= this.props.tests.length - 1
-                    ? 0
-                    : currentIndex + 1;
+            let nextIndex = this.getNextIndex();
             this.setState({
                 answer: "",
                 noOfMistakes: 0,
@@ -165,7 +189,17 @@ class Game extends Component {
                             <div>{this.state.noOfRights}</div>
                         </div>
                     </div>
+
                     <div className="buttons">
+                        <div className="shuffle" onClick={this.toggleShuffle}>
+                            <Icon
+                                icon={ICONS.SHUFFLE}
+                                size={30}
+                                color={
+                                    this.state.shuffle ? "#FFCA08" : "#FFFFFF"
+                                }
+                            />
+                        </div>
                         <div className="button" onClick={this.toggleGame}>
                             Reset
                         </div>
