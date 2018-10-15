@@ -17,16 +17,27 @@ class Words extends React.Component {
         axios.get("/openapi/words", {}).then(
             function(response) {
                 this.setState({
-                    tests: response.data.words.map(item => {
-                        return {
-                            questions: item.swedish,
-                            answers: item.english
-                        };
-                    })
+                    tests: this.shuffleArray(
+                        response.data.words.map(item => {
+                            return {
+                                questions: item.swedish,
+                                answers: item.english
+                            };
+                        })
+                    )
                 });
             }.bind(this)
         );
     }
+
+    shuffleArray = arr => {
+        let a = arr.slice(0);
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    };
 
     addWord = word => {
         axios.post("/openapi/words", word);
