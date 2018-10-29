@@ -73,7 +73,7 @@ class Game extends Component {
         this.setState({
             started: true,
             testIndex: tstIndex,
-            question: this.randomArrayItem(this.props.tests[tstIndex].questions)
+            question: this.getQuestion(tstIndex)
         });
     };
 
@@ -125,9 +125,7 @@ class Game extends Component {
                 noOfMistakes: 0,
                 showAnswer: false,
                 testIndex: nextIndex,
-                question: this.randomArrayItem(
-                    this.props.tests[nextIndex].questions
-                ),
+                question: this.getQuestion(nextIndex),
                 noOfRights:
                     this.state.noOfRights + (this.state.showAnswer ? 0 : 1)
             });
@@ -151,6 +149,15 @@ class Game extends Component {
             }
         }
         this.answerInput.focus();
+    };
+
+    getQuestion = index => {
+        const question = this.randomArrayItem(
+            this.props.tests[index].questions
+        );
+        return this.props.tests[index].helper
+            ? `${question} ${this.props.tests[index].helper}`
+            : question;
     };
 
     handleOnKeyPress = e => {

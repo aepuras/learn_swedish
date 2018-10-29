@@ -20,6 +20,7 @@ class Words extends React.Component {
                     tests: this.shuffleArray(
                         response.data.words.map(item => {
                             return {
+                                helper: item.helper,
                                 questions: item.swedish,
                                 answers: item.english
                             };
@@ -47,6 +48,7 @@ class Words extends React.Component {
         this.setState({
             tests: this.state.tests.map(item => {
                 return {
+                    helper: item.helper,
                     questions: item.answers,
                     answers: item.questions
                 };
