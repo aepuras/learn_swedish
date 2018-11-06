@@ -22,7 +22,8 @@ class Words extends React.Component {
                             return {
                                 helper: item.helper,
                                 questions: item.swedish,
-                                answers: item.english
+                                answers: item.english,
+                                learned: item.learned
                             };
                         })
                     )
@@ -50,7 +51,8 @@ class Words extends React.Component {
                 return {
                     helper: item.helper,
                     questions: item.answers,
-                    answers: item.questions
+                    answers: item.questions,
+                    learned: item.learned
                 };
             })
         });

@@ -18,7 +18,8 @@ class Game extends Component {
             question: "",
             noOfWrongs: 0,
             noOfRights: 0,
-            shuffle: false
+            shuffle: false,
+            excludeLearned: false
         };
     }
 
@@ -32,12 +33,12 @@ class Game extends Component {
 
     toggleGame = () => {
         let value = this.state.started;
-        let tstIndex = Math.floor(Math.random() * this.props.tests.length);
+        let tstIndex = Math.floor(Math.random() * this.filteredTests().length);
         this.setState({
             started: !value,
             testIndex: tstIndex,
             question: this.randomArrayItem(
-                this.props.tests[tstIndex].questions
+                this.filteredTests()[tstIndex].questions
             ),
             noOfWrongs: 0,
             noOfRights: 0,
@@ -47,10 +48,27 @@ class Game extends Component {
         });
     };
 
+    filteredTests = () => {
+        return this.state.excludeLearned
+            ? this.props.tests.filter(test => !test.learned)
+            : this.props.tests;
+    };
+
     toggleShuffle = () => {
         this.setState({
             shuffle: !this.state.shuffle
         });
+    };
+
+    toggleExcludeLearned = () => {
+        this.setState(
+            {
+                excludeLearned: !this.state.excludeLearned
+            },
+            () => {
+                this.restartGame(true);
+            }
+        );
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -68,7 +86,7 @@ class Game extends Component {
 
     restartGame = changeIndex => {
         let tstIndex = changeIndex
-            ? Math.floor(Math.random() * this.props.tests.length)
+            ? Math.floor(Math.random() * this.filteredTests().length)
             : this.state.testIndex;
         this.setState({
             started: true,
@@ -78,7 +96,7 @@ class Game extends Component {
     };
 
     randomizeHint = () => {
-        let hints = this.props.tests[this.state.testIndex].answers;
+        let hints = this.filteredTests()[this.state.testIndex].answers;
         return this.randomArrayItem(hints);
     };
 
@@ -104,19 +122,19 @@ class Game extends Component {
 
     getNextIndex = () => {
         let nextIndex =
-            this.state.testIndex >= this.props.tests.length - 1
+            this.state.testIndex >= this.filteredTests().length - 1
                 ? 0
                 : this.state.testIndex + 1;
         this.state.shuffle &&
             (nextIndex = this.randomNumber(
-                this.props.tests.length,
+                this.filteredTests().length,
                 this.state.testIndex
             ));
         return nextIndex;
     };
 
     checkAnswer = () => {
-        let test = this.props.tests[this.state.testIndex];
+        let test = this.filteredTests()[this.state.testIndex];
         this.setState({ showWrong: false });
         if (test.answers.includes(this.state.answer.toLowerCase().trim())) {
             let nextIndex = this.getNextIndex();
@@ -153,10 +171,10 @@ class Game extends Component {
 
     getQuestion = index => {
         const question = this.randomArrayItem(
-            this.props.tests[index].questions
+            this.filteredTests()[index].questions
         );
-        return this.props.tests[index].helper
-            ? `${question} ${this.props.tests[index].helper}`
+        return this.filteredTests()[index].helper
+            ? `${question} ${this.filteredTests()[index].helper}`
             : question;
     };
 
@@ -197,7 +215,10 @@ class Game extends Component {
                     </div>
 
                     <div className="buttons">
-                        <div className="shuffle" onClick={this.toggleShuffle}>
+                        <div
+                            className="buttons-icon"
+                            onClick={this.toggleShuffle}
+                        >
                             <Icon
                                 icon={ICONS.SHUFFLE}
                                 size={30}
@@ -206,8 +227,26 @@ class Game extends Component {
                                 }
                             />
                         </div>
-                        <div className="button" onClick={this.toggleGame}>
-                            Reset
+                        <div
+                            className="buttons-icon"
+                            onClick={this.toggleExcludeLearned}
+                        >
+                            <Icon
+                                icon={ICONS.SUBSET}
+                                size={30}
+                                color={
+                                    this.state.excludeLearned
+                                        ? "#FFCA08"
+                                        : "#FFFFFF"
+                                }
+                            />
+                        </div>
+                        <div className="buttons-icon" onClick={this.toggleGame}>
+                            <Icon
+                                icon={ICONS.RESET}
+                                size={30}
+                                color="#FFFFFF"
+                            />
                         </div>
                         <div className="button" onClick={this.checkAnswer}>
                             Verify

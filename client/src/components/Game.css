@@ -84,7 +84,8 @@
     justify-content: flex-end;
 }
 
-.shuffle {
+.buttons-icon {
     display: flex;
     align-items: center;
+    margin-left: 10px;
 }
