@@ -76,7 +76,8 @@ class Words extends React.Component {
                     answers: item.questions,
                     learned: item.learned
                 };
-            })
+            }),
+            toEnglish: !this.state.toEnglish
         });
     };
 
