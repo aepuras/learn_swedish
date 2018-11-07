@@ -184,6 +184,10 @@ class Game extends Component {
         }
     };
 
+    editWord = () => {
+        this.props.editCallback(this.filteredTests()[this.state.testIndex]);
+    };
+
     render() {
         return (
             <div>
@@ -215,6 +219,18 @@ class Game extends Component {
                     </div>
 
                     <div className="buttons">
+                        {this.props.editCallback && (
+                            <div
+                                className="buttons-icon"
+                                onClick={this.editWord}
+                            >
+                                <Icon
+                                    icon={ICONS.EDIT}
+                                    size={30}
+                                    color="#FFFFFF"
+                                />
+                            </div>
+                        )}
                         <div
                             className="buttons-icon"
                             onClick={this.toggleShuffle}

@@ -9,11 +9,16 @@ class Words extends React.Component {
         super(props);
         this.state = {
             tests: [],
-            toEnglish: true
+            toEnglish: true,
+            selectedWordForEdit: {}
         };
     }
 
     componentDidMount() {
+        this.loadData();
+    }
+
+    loadData() {
         axios.get("/openapi/words", {}).then(
             function(response) {
                 this.setState({
@@ -41,8 +46,25 @@ class Words extends React.Component {
         return a;
     };
 
-    addWord = word => {
-        axios.post("/openapi/words", word);
+    addWord = (oldWord, newWord) => {
+        axios.post("/openapi/words", { oldWord: oldWord, newWord: newWord });
+        this.loadData();
+        this.cancelEditMode();
+    };
+
+    editMode = word => {
+        this.setState({
+            selectedWordForEdit: {
+                english: this.state.toEnglish ? word.answers : word.questions,
+                swedish: this.state.toEnglish ? word.questions : word.answers,
+                helper: word.helper || "",
+                learned: word.learned || false
+            }
+        });
+    };
+
+    cancelEditMode = () => {
+        this.setState({ selectedWordForEdit: {} });
     };
 
     toggleToFrom = () => {
@@ -66,8 +88,12 @@ class Words extends React.Component {
                     callback={this.toggleToFrom}
                     isOn={this.state.toEnglish}
                 />
-                <Game tests={this.state.tests} />
-                <AddWord callback={this.addWord} />
+                <Game tests={this.state.tests} editCallback={this.editMode} />
+                <AddWord
+                    callback={this.addWord}
+                    selectedWordForEdit={this.state.selectedWordForEdit}
+                    cancelCallback={this.cancelEditMode}
+                />
             </div>
         );
     }

@@ -5,10 +5,36 @@ class AddWord extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            english: ["", "", ""],
-            swedish: ["", "", ""]
+            newWord: this.createEmptyWord()
         };
     }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.selectedWordForEdit != this.props.selectedWordForEdit) {
+            if (this.isEdit()) {
+                this.setState({
+                    newWord: {
+                        english: this.fixArray(
+                            this.props.selectedWordForEdit.english
+                        ),
+                        swedish: this.fixArray(
+                            this.props.selectedWordForEdit.swedish
+                        ),
+                        helper: this.props.selectedWordForEdit.helper || "",
+                        learned: this.props.selectedWordForEdit.learned || false
+                    }
+                });
+            } else {
+                this.setState({ newWord: this.createEmptyWord() });
+            }
+        }
+    }
+
+    fixArray = arr => {
+        return ["", "", ""].map((val, index) => {
+            return arr.length >= index + 1 ? arr[index] : val;
+        });
+    };
 
     printRow = index => {
         return (
@@ -20,7 +46,7 @@ class AddWord extends Component {
                         id={`english-${index}`}
                         name={`english-${index}`}
                         onChange={this.onChange}
-                        value={this.state.english[index]}
+                        value={this.state.newWord.english[index]}
                     />
                 </div>
                 <div>
@@ -30,43 +56,106 @@ class AddWord extends Component {
                         id={`swedish-${index}`}
                         name={`swedish-${index}`}
                         onChange={this.onChange}
-                        value={this.state.swedish[index]}
+                        value={this.state.newWord.swedish[index]}
                     />
                 </div>
             </div>
         );
     };
 
-    onChange = e => {
-        const arr = e.target.name.split("-");
-        const stateValue = this.state[arr[0]];
-        stateValue[arr[1]] = e.target.value;
-        this.setState({ [arr[0]]: stateValue });
+    createEmptyWord = () => {
+        return {
+            english: ["", "", ""],
+            swedish: ["", "", ""],
+            helper: "",
+            learned: false
+        };
+    };
+
+    isEdit = () => {
+        return Object.keys(this.props.selectedWordForEdit).length > 0;
+    };
+
+    onChange = event => {
+        let field = event.target.name;
+        let index = -1;
+
+        if (event.target.name.indexOf("-") > 0) {
+            const arr = event.target.name.split("-");
+            field = arr[0];
+            index = arr[1];
+        }
+
+        const value = event.target.value;
+        const newWord = this.state.newWord;
+
+        if (index > -1) {
+            newWord[field][index] = value;
+        } else {
+            newWord[field] =
+                event.target.type === "checkbox" ? event.target.checked : value;
+        }
+
+        this.setState({
+            newWord
+        });
     };
 
     save = () => {
         //validate
-        this.props.callback(this.state);
-        this.setState({
-            english: ["", "", ""],
-            swedish: ["", "", ""]
-        });
+        this.props.callback(this.props.selectedWordForEdit, this.state.newWord);
+        this.setState({ newWord: this.createEmptyWord() });
+    };
+
+    cancelEdit = () => {
+        this.props.cancelCallback();
     };
 
     render() {
         return (
             <React.Fragment>
                 <div className="settings">
-                    <div className="title">Add word</div>
+                    <div className="title">
+                        {this.isEdit() ? "Edit" : "Add"} word
+                    </div>
                     <div className="item">
                         <div className="wordRows">
                             {[0, 1, 2].map(index => {
                                 return this.printRow(index);
                             })}
+                            <div className="wordRow">
+                                <div>
+                                    <input
+                                        placeholder=":helper"
+                                        type="text"
+                                        id="helper"
+                                        name="helper"
+                                        value={this.state.newWord.helper}
+                                        onChange={this.onChange}
+                                    />
+                                </div>
+                                <div className="learned">
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            name="learned"
+                                            checked={this.state.newWord.learned}
+                                            value={this.state.newWord.learned}
+                                            onChange={this.onChange}
+                                        />
+                                        learned
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="addWord">
+                    {this.isEdit() && (
+                        <div className="button" onClick={this.cancelEdit}>
+                            Cancel
+                        </div>
+                    )}
                     <div className="button" onClick={this.save}>
                         Save
                     </div>

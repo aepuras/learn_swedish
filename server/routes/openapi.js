@@ -44,17 +44,36 @@ router.get("/words", (req, res) => {
 });
 
 router.post("/words", (req, res) => {
-    let word = new Word({
-        english: req.body.english.filter(n => n),
-        swedish: req.body.swedish.filter(n => n)
-    });
-
-    word.save(err => {
-        if (err) {
-            return next(err);
-        }
-        res.send("new word saved");
-    });
+    if (Object.keys(req.body.oldWord).length === 0) {
+        let word = new Word({
+            english: req.body.newWord.english.filter(n => n),
+            swedish: req.body.newWord.swedish.filter(n => n)
+        });
+        word.save(err => {
+            if (err) {
+                return next(err);
+            }
+            res.send("new word saved");
+        });
+    } else {
+        Word.findOne(req.body.oldWord, (findErr, word) => {
+            if (!findErr && word) {
+                word.english = req.body.newWord.english.filter(n => n);
+                word.swedish = req.body.newWord.swedish.filter(n => n);
+                word.learned = req.body.newWord.learned;
+                word.helper = req.body.newWord.helper;
+                word.save(err => {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.send("edited");
+                });
+            }
+            if (findErr) {
+                console.log(findErr);
+            }
+        });
+    }
 });
 
 module.exports = router;
