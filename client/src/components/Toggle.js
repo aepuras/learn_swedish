@@ -12,6 +12,12 @@ class Toggle extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.isOn != this.props.isOn) {
+            this.setState({ on: this.props.isOn });
+        }
+    }
+
     toggle() {
         const current = this.state.on;
         this.setState({

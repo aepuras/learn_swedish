@@ -31,7 +31,8 @@ class Words extends React.Component {
                                 learned: item.learned
                             };
                         })
-                    )
+                    ),
+                    toEnglish: true
                 });
             }.bind(this)
         );
