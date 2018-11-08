@@ -1,0 +1,15 @@
+.loginForm {
+  display: block;
+  overflow: auto;
+  position: fixed;
+  width: 300px;
+  background-color: #ccead1;
+  padding: 10px;
+  height: 100%;
+  top: 50px;
+}
+
+.error-message {
+  font-size: 14px;
+  color: orange;
+}

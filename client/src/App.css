@@ -11,3 +11,15 @@
 	padding: 14px;
 	margin-left: 10px;
 }
+
+.section {
+	color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	background-color: #0083c5;
+	border-radius: 0.5em;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	margin-top: 15px;
+	padding: 14px;
+}
