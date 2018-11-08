@@ -9,7 +9,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            verbsWordsToggle: true
+            WordsVerbsToggle: true
         };
         this.toggle = this.toggle.bind(this);
     }
@@ -47,7 +47,7 @@ class App extends Component {
 
     toggle(value) {
         this.setState({
-            verbsWordsToggle: value
+            WordsVerbsToggle: value
         });
     }
 
@@ -60,14 +60,14 @@ class App extends Component {
                     render={() => (
                         <React.Fragment>
                             <Toggle
-                                items={["Verbs", "Words"]}
+                                items={["Words", "Verbs"]}
                                 callback={this.toggle}
-                                isOn={this.state.verbsWordsToggle}
+                                isOn={this.state.WordsVerbsToggle}
                             />
-                            {this.state.verbsWordsToggle ? (
-                                <Verbs />
-                            ) : (
+                            {this.state.WordsVerbsToggle ? (
                                 <Words />
+                            ) : (
+                                <Verbs />
                             )}
                         </React.Fragment>
                     )}

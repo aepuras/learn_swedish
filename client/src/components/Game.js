@@ -231,6 +231,7 @@ class Game extends Component {
                                 />
                             </div>
                         )}
+                        {/*
                         <div
                             className="buttons-icon"
                             onClick={this.toggleShuffle}
@@ -243,6 +244,7 @@ class Game extends Component {
                                 }
                             />
                         </div>
+                        */}
                         <div
                             className="buttons-icon"
                             onClick={this.toggleExcludeLearned}
