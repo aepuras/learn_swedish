@@ -56,6 +56,9 @@ router.post("/words", (req, res) => {
             res.send("new word saved");
         });
     } else {
+        let oldWord = req.body.oldWord;
+        oldWord.helper === "" && delete oldWord.helper;
+        !oldWord.learned && delete oldWord.learned;
         Word.findOne(req.body.oldWord, (findErr, word) => {
             if (!findErr && word) {
                 word.english = req.body.newWord.english.filter(n => n);
