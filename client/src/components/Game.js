@@ -189,6 +189,7 @@ class Game extends Component {
             );
         } else {
             this.props.toggleEditModeCallback();
+            this.answerInput.focus();
         }
     };
 
