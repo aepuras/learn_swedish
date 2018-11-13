@@ -37,9 +37,7 @@ class Game extends Component {
         this.setState({
             started: !value,
             testIndex: tstIndex,
-            question: this.randomArrayItem(
-                this.filteredTests()[tstIndex].questions
-            ),
+            question: this.getQuestion(tstIndex),
             noOfWrongs: 0,
             noOfRights: 0,
             showAnswer: false,
@@ -184,8 +182,14 @@ class Game extends Component {
         }
     };
 
-    editWord = () => {
-        this.props.editCallback(this.filteredTests()[this.state.testIndex]);
+    toggleEditMode = () => {
+        if (!this.props.editMode) {
+            this.props.toggleEditModeCallback(
+                this.filteredTests()[this.state.testIndex]
+            );
+        } else {
+            this.props.toggleEditModeCallback();
+        }
     };
 
     render() {
@@ -219,15 +223,19 @@ class Game extends Component {
                     </div>
 
                     <div className="buttons">
-                        {this.props.editCallback && (
+                        {this.props.toggleEditModeCallback && (
                             <div
                                 className="buttons-icon"
-                                onClick={this.editWord}
+                                onClick={this.toggleEditMode}
                             >
                                 <Icon
                                     icon={ICONS.EDIT}
                                     size={30}
-                                    color="#FFFFFF"
+                                    color={
+                                        this.props.editMode
+                                            ? "#FFCA08"
+                                            : "#FFFFFF"
+                                    }
                                 />
                             </div>
                         )}

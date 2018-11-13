@@ -11,7 +11,7 @@ class AddWord extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.selectedWordForEdit != this.props.selectedWordForEdit) {
-            if (this.isEdit()) {
+            if (this.props.editMode) {
                 this.setState({
                     newWord: {
                         english: this.fixArray(
@@ -72,10 +72,6 @@ class AddWord extends Component {
         };
     };
 
-    isEdit = () => {
-        return Object.keys(this.props.selectedWordForEdit).length > 0;
-    };
-
     onChange = event => {
         let field = event.target.name;
         let index = -1;
@@ -107,16 +103,12 @@ class AddWord extends Component {
         this.setState({ newWord: this.createEmptyWord() });
     };
 
-    cancelEdit = () => {
-        this.props.cancelCallback();
-    };
-
     render() {
         return (
             <React.Fragment>
                 <div className="settings">
                     <div className="title">
-                        {this.isEdit() ? "Edit" : "Add"} word
+                        {this.props.editMode ? "Edit" : "Add"} word
                     </div>
                     <div className="item">
                         <div className="wordRows">
@@ -151,11 +143,6 @@ class AddWord extends Component {
                     </div>
                 </div>
                 <div className="addWord">
-                    {this.isEdit() && (
-                        <div className="button" onClick={this.cancelEdit}>
-                            Cancel
-                        </div>
-                    )}
                     <div className="button" onClick={this.save}>
                         Save
                     </div>

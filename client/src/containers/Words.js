@@ -10,7 +10,8 @@ class Words extends React.Component {
         this.state = {
             tests: [],
             toEnglish: true,
-            selectedWordForEdit: {}
+            selectedWordForEdit: {},
+            editMode: false
         };
     }
 
@@ -50,22 +51,21 @@ class Words extends React.Component {
     addWord = (oldWord, newWord) => {
         axios.post("/openapi/words", { oldWord: oldWord, newWord: newWord });
         this.loadData();
-        this.cancelEditMode();
+        this.toggleEditMode();
     };
 
-    editMode = word => {
-        this.setState({
-            selectedWordForEdit: {
-                english: this.state.toEnglish ? word.answers : word.questions,
-                swedish: this.state.toEnglish ? word.questions : word.answers,
-                helper: word.helper || "",
-                learned: word.learned || false
-            }
-        });
-    };
+    toggleEditMode = word => {
+        let w = {},
+            editMode = false;
+        if (word) {
+            w.english = this.state.toEnglish ? word.answers : word.questions;
+            w.swedish = this.state.toEnglish ? word.questions : word.answers;
+            w.helper = word.helper || "";
+            w.learned = word.learned || false;
+            editMode = true;
+        }
 
-    cancelEditMode = () => {
-        this.setState({ selectedWordForEdit: {} });
+        this.setState({ selectedWordForEdit: w, editMode: editMode });
     };
 
     toggleToFrom = () => {
@@ -90,11 +90,15 @@ class Words extends React.Component {
                     callback={this.toggleToFrom}
                     isOn={this.state.toEnglish}
                 />
-                <Game tests={this.state.tests} editCallback={this.editMode} />
+                <Game
+                    tests={this.state.tests}
+                    toggleEditModeCallback={this.toggleEditMode}
+                    editMode={this.state.editMode}
+                />
                 <AddWord
                     callback={this.addWord}
                     selectedWordForEdit={this.state.selectedWordForEdit}
-                    cancelCallback={this.cancelEditMode}
+                    editMode={this.state.editMode}
                 />
             </div>
         );
