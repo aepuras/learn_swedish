@@ -132,7 +132,12 @@ class Game extends Component {
     };
 
     checkAnswer = () => {
-        let test = this.filteredTests()[this.state.testIndex];
+        const test = {
+            ...this.filteredTests()[this.state.testIndex],
+            answers: this.filteredTests()[this.state.testIndex].answers.map(
+                answer => answer.toLowerCase()
+            )
+        };
         this.setState({ showWrong: false });
         if (test.answers.includes(this.state.answer.toLowerCase().trim())) {
             let nextIndex = this.getNextIndex();
