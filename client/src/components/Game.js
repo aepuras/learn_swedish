@@ -18,7 +18,6 @@ class Game extends Component {
             question: "",
             noOfWrongs: 0,
             noOfRights: 0,
-            shuffle: false,
             excludeLearned: false
         };
     }
@@ -50,12 +49,6 @@ class Game extends Component {
         return this.state.excludeLearned
             ? this.props.tests.filter(test => !test.learned)
             : this.props.tests;
-    };
-
-    toggleShuffle = () => {
-        this.setState({
-            shuffle: !this.state.shuffle
-        });
     };
 
     toggleExcludeLearned = () => {
@@ -98,15 +91,10 @@ class Game extends Component {
         return this.randomArrayItem(hints);
     };
 
-    randomNumber = (max, current) => {
+    randomNumber = (max) => {
         let rnd = 0;
         if (max > 1) {
             rnd = Math.floor(Math.random() * max);
-            if (current) {
-                while (current === rnd) {
-                    rnd = Math.floor(Math.random() * max);
-                }
-            }
         }
         return rnd;
     };
@@ -123,11 +111,6 @@ class Game extends Component {
             this.state.testIndex >= this.filteredTests().length - 1
                 ? 0
                 : this.state.testIndex + 1;
-        this.state.shuffle &&
-            (nextIndex = this.randomNumber(
-                this.filteredTests().length,
-                this.state.testIndex
-            ));
         return nextIndex;
     };
 
@@ -151,9 +134,8 @@ class Game extends Component {
                     this.state.noOfRights + (this.state.showAnswer ? 0 : 1)
             });
         } else {
-            let mistakes = this.state.noOfMistakes;
-            this.setState({ noOfMistakes: ++mistakes });
-            if (this.state.noOfMistakes > 2) {
+            let mistakes = ++this.state.noOfMistakes;
+            if (mistakes > 2) {
                 this.setState({
                     noOfMistakes: 0,
                     showAnswer: true,
@@ -162,23 +144,20 @@ class Game extends Component {
                     noOfWrongs: this.state.noOfWrongs + 1
                 });
             } else {
-                this.timeOuts.push(
-                    setTimeout(() => {
-                        this.setState({ showWrong: true });
-                    }, 200)
-                );
+                this.setState({ 
+                    showWrong: true,
+                    noOfMistakes: mistakes
+                });
             }
         }
         this.answerInput.focus();
     };
 
     getQuestion = index => {
-        const question = this.randomArrayItem(
-            this.filteredTests()[index].questions
-        );
-        return this.filteredTests()[index].helper
-            ? `${question} ${this.filteredTests()[index].helper}`
-            : question;
+        const questions = this.filteredTests()[index].questions;
+        const question = this.randomArrayItem(questions);
+        const helper = this.filteredTests()[index].helper || '';
+        return `${question} ${helper}`;
     };
 
     handleOnKeyPress = e => {
@@ -189,6 +168,7 @@ class Game extends Component {
 
     toggleEditMode = () => {
         if (!this.props.editMode) {
+            const temp = this;
             this.props.toggleEditModeCallback(
                 this.filteredTests()[this.state.testIndex]
             );
@@ -245,20 +225,6 @@ class Game extends Component {
                                 />
                             </div>
                         )}
-                        {/*
-                        <div
-                            className="buttons-icon"
-                            onClick={this.toggleShuffle}
-                        >
-                            <Icon
-                                icon={ICONS.SHUFFLE}
-                                size={30}
-                                color={
-                                    this.state.shuffle ? "#FFCA08" : "#FFFFFF"
-                                }
-                            />
-                        </div>
-                        */}
                         <div
                             className="buttons-icon"
                             onClick={this.toggleExcludeLearned}

@@ -99,6 +99,12 @@ class AddWord extends Component {
 
     save = () => {
         //validate
+        const englishWordsCount = this.state.newWord.english.filter(word => word !== '').length;
+        const swedishWordCount = this.state.newWord.swedish.filter(word => word !== '').length;
+        if (englishWordsCount === 0 || swedishWordCount === 0) {
+            return false;
+        }
+    
         this.props.callback(this.props.selectedWordForEdit, this.state.newWord);
         this.setState({ newWord: this.createEmptyWord() });
     };
