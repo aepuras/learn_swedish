@@ -27,13 +27,12 @@ class Words extends React.Component {
                         response.data.words.map(item => {
                             return {
                                 helper: item.helper,
-                                questions: item.swedish,
-                                answers: item.english,
+                                questions: this.state.toEnglish ? item.swedish : item.english,
+                                answers: this.state.toEnglish ? item.english : item.swedish,
                                 learned: item.learned
                             };
                         })
-                    ),
-                    toEnglish: true
+                    )
                 });
             }.bind(this)
         );
