@@ -1,8 +1,5 @@
 .toggle {
-    color: #ffffff;
     display: flex;
-    background-color: #0083c5;
-    border-radius: 0.5em;
     font-family: Arial, sans-serif;
     font-weight: bold;
     overflow: hidden;
@@ -14,8 +11,4 @@
     justify-content: center;
     align-content: center;
     flex: 1;
-}
-.toggle div.active {
-    background-color: #ffca08;
-    color: #0070af;
 }

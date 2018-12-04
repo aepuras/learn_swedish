@@ -1,18 +1,24 @@
 import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import LoginPage from "./containers/LoginPage";
-import Verbs from "./containers/Verbs";
-import Words from "./containers/Words";
-import Toggle from "./components/Toggle";
+import MainPage from "./containers/MainPage";
+import {ThemeContext, themes} from './theme-context';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            WordsVerbsToggle: true
+    
+        this.toggleTheme = themeName => {
+          this.setState(state => ({
+            theme: themes[themeName]
+          }));
         };
-        this.toggle = this.toggle.bind(this);
-    }
+    
+        this.state = {
+          theme: themes.white,
+          toggleTheme: this.toggleTheme,
+        };
+      }
 
     componentDidMounts() {
         document.addEventListener(
@@ -45,35 +51,18 @@ class App extends Component {
         return supportsPassiveOption;
     }
 
-    toggle(value) {
-        this.setState({
-            WordsVerbsToggle: value
-        });
-    }
-
     render() {
         return (
-            <div className="App">
-                <Route
-                    exact
-                    path="/"
-                    render={() => (
-                        <React.Fragment>
-                            <Toggle
-                                items={["Words", "Verbs"]}
-                                callback={this.toggle}
-                                isOn={this.state.WordsVerbsToggle}
-                            />
-                            {this.state.WordsVerbsToggle ? (
-                                <Words />
-                            ) : (
-                                <Verbs />
-                            )}
-                        </React.Fragment>
+            <ThemeContext.Provider value={this.state}>
+                <ThemeContext.Consumer>
+                    {({theme}) => (
+                        <div className="App" style={{background: theme.mainColor}}>
+                            <Route exact path="/" component={MainPage} />
+                            <Route exact path="/login" component={LoginPage} />
+                        </div>
                     )}
-                />
-                <Route exact path="/login" component={LoginPage} />
-            </div>
+                </ThemeContext.Consumer>
+            </ThemeContext.Provider>
         );
     }
 }

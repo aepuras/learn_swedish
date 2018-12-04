@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { ThemeContext } from '../theme-context';
 import "./AddWord.css";
 
 class AddWord extends Component {
@@ -10,7 +11,7 @@ class AddWord extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.selectedWordForEdit != this.props.selectedWordForEdit) {
+        if (prevProps.selectedWordForEdit !== this.props.selectedWordForEdit) {
             if (this.props.editMode) {
                 this.setState({
                     newWord: {
@@ -36,7 +37,7 @@ class AddWord extends Component {
         });
     };
 
-    printRow = index => {
+    printRow = (index, theme) => {
         return (
             <div className="wordRow" key={index}>
                 <div>
@@ -47,6 +48,10 @@ class AddWord extends Component {
                         name={`english-${index}`}
                         onChange={this.onChange}
                         value={this.state.newWord.english[index]}
+                        style={{
+                            borderBottomColor: theme.mainColor,
+                            backgroundColor: theme.inputColor
+                        }}
                     />
                 </div>
                 <div>
@@ -57,6 +62,10 @@ class AddWord extends Component {
                         name={`swedish-${index}`}
                         onChange={this.onChange}
                         value={this.state.newWord.swedish[index]}
+                        style={{
+                            borderBottomColor: theme.mainColor,
+                            backgroundColor: theme.inputColor
+                        }}
                     />
                 </div>
             </div>
@@ -104,56 +113,71 @@ class AddWord extends Component {
         if (englishWordsCount === 0 || swedishWordCount === 0) {
             return false;
         }
-    
+
         this.props.callback(this.props.selectedWordForEdit, this.state.newWord);
         this.setState({ newWord: this.createEmptyWord() });
     };
 
     render() {
         return (
-            <React.Fragment>
-                <div className="settings">
-                    <div className="title">
-                        {this.props.editMode ? "Edit" : "Add"} word
-                    </div>
-                    <div className="item">
-                        <div className="wordRows">
-                            {[0, 1, 2].map(index => {
-                                return this.printRow(index);
-                            })}
-                            <div className="wordRow">
-                                <div>
-                                    <input
-                                        placeholder=":helper"
-                                        type="text"
-                                        id="helper"
-                                        name="helper"
-                                        value={this.state.newWord.helper}
-                                        onChange={this.onChange}
-                                    />
-                                </div>
-                                <div className="learned">
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            name="learned"
-                                            checked={this.state.newWord.learned}
-                                            value={this.state.newWord.learned}
-                                            onChange={this.onChange}
-                                        />
-                                        learned
-                                    </label>
+            <ThemeContext.Consumer>
+                {({ theme, toggleTheme }) => (
+                    <React.Fragment>
+                        <div className="settings" 
+                            style={{
+                                backgroundColor: theme.secondColor,
+                                borderRadius: theme.rounded
+                            }}>
+                            <div className="title" style={{ color: theme.mainColor }}>
+                                {this.props.editMode ? "Edit" : "Add"} word
+                            </div>
+                            <div className="item" style={{ backgroundColor: theme.panelBackground }}>
+                                <div className="wordRows">
+                                    {[0, 1, 2].map(index => this.printRow(index, theme))}
+                                    <div className="wordRow">
+                                        <div>
+                                            <input
+                                                placeholder=":helper"
+                                                type="text"
+                                                id="helper"
+                                                name="helper"
+                                                value={this.state.newWord.helper}
+                                                onChange={this.onChange}
+                                                style={{
+                                                    borderBottomColor: theme.mainColor,
+                                                    backgroundColor: theme.inputColor
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="learned">
+                                            <label style={{ color: theme.textColor }}>
+                                                <input
+                                                    type="checkbox"
+                                                    name="learned"
+                                                    checked={this.state.newWord.learned}
+                                                    value={this.state.newWord.learned}
+                                                    onChange={this.onChange}
+                                                />
+                                                learned
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="addWord">
-                    <div className="button" onClick={this.save}>
-                        Save
-                    </div>
-                </div>
-            </React.Fragment>
+                        <div className="addWord">
+                            <div className="button" 
+                                onClick={this.save}
+                                style={{
+                                    backgroundColor: theme.panelBackground,
+                                    color: theme.textColor
+                                }}>
+                                Save
+                            </div>
+                        </div>
+                    </React.Fragment>
+                )}
+            </ThemeContext.Consumer>
         );
     }
 }

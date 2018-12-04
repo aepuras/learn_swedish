@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classnames from "classnames";
 import Icon from "./Icon";
 import { ICONS } from "../constants.js";
+import { ThemeContext } from '../theme-context';
 import "../App.css";
 import "./Game.css";
 
@@ -144,7 +145,7 @@ class Game extends Component {
                     noOfWrongs: this.state.noOfWrongs + 1
                 });
             } else {
-                this.setState({ 
+                this.setState({
                     showWrong: true,
                     noOfMistakes: mistakes
                 });
@@ -168,7 +169,6 @@ class Game extends Component {
 
     toggleEditMode = () => {
         if (!this.props.editMode) {
-            const temp = this;
             this.props.toggleEditModeCallback(
                 this.filteredTests()[this.state.testIndex]
             );
@@ -180,78 +180,95 @@ class Game extends Component {
 
     render() {
         return (
-            <div>
-                <div className="game">
-                    <div className="question">{this.state.question}</div>
-                    <div className="answer">
-                        <input
-                            placeholder=":answer"
-                            onChange={this.onChange}
-                            onKeyPress={this.handleOnKeyPress}
-                            value={this.state.answer}
-                            className={classnames(
-                                { hint: !!this.state.showAnswer },
-                                { error: this.state.showWrong }
-                            )}
-                            ref={ip => (this.answerInput = ip)}
-                            type="text"
-                            id="answer"
-                            name="answer"
-                        />
-                    </div>
-                </div>
-                <div className="footer">
-                    <div className="stats">
-                        <div>
-                            <div>{this.state.noOfWrongs}</div>
-                            <div>{this.state.noOfRights}</div>
-                        </div>
-                    </div>
-
-                    <div className="buttons">
-                        {this.props.toggleEditModeCallback && (
-                            <div
-                                className="buttons-icon"
-                                onClick={this.toggleEditMode}
-                            >
-                                <Icon
-                                    icon={ICONS.EDIT}
-                                    size={30}
-                                    color={
-                                        this.props.editMode
-                                            ? "#FFCA08"
-                                            : "#FFFFFF"
-                                    }
+            <ThemeContext.Consumer>
+                {({ theme, toggleTheme }) => (
+                    <div>
+                        <div className="game"
+                            style={{
+                                backgroundColor: theme.panelBackground,
+                                borderRadius: theme.rounded,
+                            }}>
+                            <div className="question" style={{ color: theme.textColor }}>{this.state.question}</div>
+                            <div className="answer">
+                                <input
+                                    placeholder=":answer"
+                                    onChange={this.onChange}
+                                    onKeyPress={this.handleOnKeyPress}
+                                    value={this.state.answer}
+                                    className={classnames(
+                                        { hint: !!this.state.showAnswer },
+                                        { error: this.state.showWrong }
+                                    )}
+                                    style={{
+                                        borderBottomColor: theme.mainColor,
+                                        backgroundColor: theme.inputColor
+                                    }}
+                                    ref={ip => (this.answerInput = ip)}
+                                    type="text"
+                                    id="answer"
+                                    name="answer"
                                 />
                             </div>
-                        )}
-                        <div
-                            className="buttons-icon"
-                            onClick={this.toggleExcludeLearned}
-                        >
-                            <Icon
-                                icon={ICONS.SUBSET}
-                                size={30}
-                                color={
-                                    this.state.excludeLearned
-                                        ? "#FFCA08"
-                                        : "#FFFFFF"
-                                }
-                            />
                         </div>
-                        <div className="buttons-icon" onClick={this.toggleGame}>
-                            <Icon
-                                icon={ICONS.RESET}
-                                size={30}
-                                color="#FFFFFF"
-                            />
-                        </div>
-                        <div className="button" onClick={this.checkAnswer}>
-                            Verify
+                        <div className="footer">
+                            <div className="stats">
+                                <div>
+                                    <div>{this.state.noOfWrongs}</div>
+                                    <div>{this.state.noOfRights}</div>
+                                </div>
+                            </div>
+
+                            <div className="buttons">
+                                {this.props.toggleEditModeCallback && (
+                                    <div
+                                        className="buttons-icon"
+                                        onClick={this.toggleEditMode}
+                                    >
+                                        <Icon
+                                            icon={ICONS.EDIT}
+                                            size={30}
+                                            color={
+                                                this.props.editMode
+                                                    ? theme.secondColor
+                                                    : theme.textColor
+                                            }
+                                        />
+                                    </div>
+                                )}
+                                <div
+                                    className="buttons-icon"
+                                    onClick={this.toggleExcludeLearned}
+                                >
+                                    <Icon
+                                        icon={ICONS.SUBSET}
+                                        size={30}
+                                        color={
+                                            this.state.excludeLearned
+                                                ? theme.secondColor
+                                                : theme.textColor
+                                        }
+                                    />
+                                </div>
+                                <div className="buttons-icon" onClick={this.toggleGame}>
+                                    <Icon
+                                        icon={ICONS.RESET}
+                                        size={30}
+                                        color={theme.textColor}
+                                    />
+                                </div>
+                                <div className="button" 
+                                    onClick={this.checkAnswer}
+                                    style={{
+                                        backgroundColor: theme.panelBackground,
+                                        color: theme.textColor
+                                    }}>
+                                    Verify
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                )}
+            </ThemeContext.Consumer>
         );
     }
 }
