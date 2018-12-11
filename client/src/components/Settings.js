@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import Setting from "./Setting";
+import { ThemeContext } from '../theme-context';
 import "./Settings.css";
 import iScroll from "iscroll/build/iscroll-probe";
 import ReactIScroll from "react-iscroll";
 
 class Settings extends Component {
+    constructor(props) {
+        super(props);
+        this.theScroll = React.createRef();
+    }
+
     onScrollStart() {
         console.log("testing");
     }
@@ -24,9 +30,9 @@ class Settings extends Component {
     }
 
     componentDidMount() {
-        this.refs.iScroll.withIScroll(
+        this.theScroll.current.withIScroll(
             true,
-            function(iScroll) {
+            function (iScroll) {
                 iScroll.scrollTo(
                     this.props.title === "Question" ? -100 : -225,
                     0
@@ -35,29 +41,40 @@ class Settings extends Component {
         );
     }
 
+    getGradientStyle = (theme) => {
+        return ({
+            backgroundColor: theme.panelBackground,
+            background: `linear-gradient(to left, ${theme.panelBackground}00, ${theme.panelBackground})`
+        });
+    };
+
     render() {
         return (
-            <div className="settings">
-                <div className="title">{this.props.title}</div>
-                <div className="item">
-                    <div className="gradient_start" />
-                    <ReactIScroll
-                        ref="iScroll"
-                        iScroll={iScroll}
-                        options={this.props.options}
-                        className="scroller-wrapper"
-                    >
-                        <div className="scroller">
-                            <ul id="questions-list">
-                                {this.settingsComponents()}
-                            </ul>
+            <ThemeContext.Consumer>
+                {({ theme }) => (
+                <div className="settings" style={{ backgroundColor: theme.secondColor }}>
+                        <div className="title" style={{ color: theme.textColorInverted }}>{this.props.title}</div>
+                        <div className="item" style={{ backgroundColor: theme.panelBackground }}>
+                            <div className="gradient_start" style={this.getGradientStyle(theme)} />
+                            <ReactIScroll
+                                ref={this.theScroll}
+                                iScroll={iScroll}
+                                options={this.props.options}
+                                className="scroller-wrapper"
+                            >
+                                <div className="scroller">
+                                    <ul id="questions-list">
+                                        {this.settingsComponents()}
+                                    </ul>
+                                </div>
+                            </ReactIScroll>
+                            <div className="gradient_end">
+                                <div  style={this.getGradientStyle(theme)} />
+                            </div>
                         </div>
-                    </ReactIScroll>
-                    <div className="gradient_end">
-                        <div />
                     </div>
-                </div>
-            </div>
+                )}
+            </ThemeContext.Consumer>
         );
     }
 }

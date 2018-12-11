@@ -128,7 +128,7 @@ class AddWord extends Component {
                                 backgroundColor: theme.secondColor,
                                 borderRadius: theme.rounded
                             }}>
-                            <div className="title" style={{ color: theme.mainColor }}>
+                            <div className="title" style={{ color: theme.textColorInverted }}>
                                 {this.props.editMode ? "Edit" : "Add"} word
                             </div>
                             <div className="item" style={{ backgroundColor: theme.panelBackground }}>

@@ -75,7 +75,8 @@ class Header extends Component {
                                 color: theme.mainColor
                                  }}>Theme</li>
                             <li onClick={(e) => {this.themeClick(e, toggleTheme)}} className={classnames({active: theme.name === 'blue'})}>blue</li>
-                            <li onClick={(e) => {this.themeClick(e, toggleTheme)}} className={classnames({active: theme.name === 'white'})}>white</li>
+                            <li onClick={(e) => {this.themeClick(e, toggleTheme)}} className={classnames({active: theme.name === 'light'})}>light</li>
+                            <li onClick={(e) => {this.themeClick(e, toggleTheme)}} className={classnames({active: theme.name === 'dark'})}>dark</li>
                         </ul>
                     </header>
                 )}

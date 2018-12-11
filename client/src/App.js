@@ -15,7 +15,7 @@ class App extends Component {
         };
     
         this.state = {
-          theme: themes.white,
+          theme: themes.dark,
           toggleTheme: this.toggleTheme,
         };
       }

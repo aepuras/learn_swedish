@@ -29,7 +29,7 @@ class Toggle extends Component {
         if ((i === 0 && this.state.on) || (i === 1 && !this.state.on)) {
             return ({
                 backgroundColor: theme.secondColor,
-                color: theme.mainColor
+                color: theme.textColorInverted
             });
         } else {
             return ({
