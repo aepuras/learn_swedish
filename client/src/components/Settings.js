@@ -41,10 +41,10 @@ class Settings extends Component {
         );
     }
 
-    getGradientStyle = (theme) => {
+    getGradientStyle = (theme, direction) => {
         return ({
             backgroundColor: theme.panelBackground,
-            background: `linear-gradient(to left, ${theme.panelBackground}00, ${theme.panelBackground})`
+            background: `linear-gradient(to ${direction}, ${theme.panelBackground}00, ${theme.panelBackground})`
         });
     };
 
@@ -55,7 +55,7 @@ class Settings extends Component {
                 <div className="settings" style={{ backgroundColor: theme.secondColor }}>
                         <div className="title" style={{ color: theme.textColorInverted }}>{this.props.title}</div>
                         <div className="item" style={{ backgroundColor: theme.panelBackground }}>
-                            <div className="gradient_start" style={this.getGradientStyle(theme)} />
+                            <div className="gradient_start" style={this.getGradientStyle(theme, 'left')} />
                             <ReactIScroll
                                 ref={this.theScroll}
                                 iScroll={iScroll}
@@ -69,7 +69,7 @@ class Settings extends Component {
                                 </div>
                             </ReactIScroll>
                             <div className="gradient_end">
-                                <div  style={this.getGradientStyle(theme)} />
+                                <div  style={this.getGradientStyle(theme, 'right')} />
                             </div>
                         </div>
                     </div>
