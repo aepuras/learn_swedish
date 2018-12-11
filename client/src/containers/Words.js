@@ -3,6 +3,7 @@ import axios from "axios-es6";
 import Game from "../components/Game";
 import AddWord from "../components/AddWord";
 import Toggle from "../components/Toggle";
+import Splash from "../components/Splash";
 
 class Words extends React.Component {
     constructor(props) {
@@ -11,7 +12,8 @@ class Words extends React.Component {
             tests: [],
             toEnglish: true,
             selectedWordForEdit: {},
-            editMode: false
+            editMode: false,
+            loading: false,
         };
     }
 
@@ -20,8 +22,9 @@ class Words extends React.Component {
     }
 
     loadData() {
+        this.setState({ loading: true });
         axios.get("/openapi/words", {}).then(
-            function(response) {
+            response => {
                 this.setState({
                     tests: this.shuffleArray(
                         response.data.words.map(item => {
@@ -32,9 +35,10 @@ class Words extends React.Component {
                                 learned: item.learned
                             };
                         })
-                    )
+                    ),
+                    loading: false,
                 });
-            }.bind(this)
+            }
         );
     }
 
@@ -48,7 +52,9 @@ class Words extends React.Component {
     };
 
     addWord = (oldWord, newWord) => {
-        axios.post("/openapi/words", { oldWord: oldWord, newWord: newWord });
+        this.setState({ loading: true });
+        axios.post("/openapi/words", { oldWord: oldWord, newWord: newWord })
+            .then(() => { this.setState({ loading: false }) });
         this.loadData();
         this.toggleEditMode();
     };
@@ -84,6 +90,7 @@ class Words extends React.Component {
     render() {
         return (
             <div>
+                {this.state.loading && <Splash />}
                 <Toggle
                     items={["to english", "to swedish"]}
                     callback={this.toggleToFrom}

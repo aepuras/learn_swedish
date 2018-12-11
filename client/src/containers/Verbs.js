@@ -4,6 +4,7 @@ import data from "../data/verbs";
 import Settings from "../components/Settings";
 import Game from "../components/Game";
 import Toggle from "../components/Toggle";
+import Splash from "../components/Splash";
 
 const CURRENT_QUESTION = "presens",
     CURRENT_ANSWER = "preteritum";
@@ -15,7 +16,8 @@ class Verbs extends React.Component {
             currentQuestion: CURRENT_QUESTION,
             currentAnswer: CURRENT_ANSWER,
             tests: [],
-            commonVerbs: true
+            commonVerbs: true,
+            loading: false,
         };
         this.settings = Object.getOwnPropertyNames(data[0].items[0]);
     }
@@ -59,6 +61,7 @@ class Verbs extends React.Component {
     };
 
     setTests = (question, answer, commonVerbs) => {
+        this.setState({ loading: true });
         axios
             .get(`/openapi/verbs/${commonVerbs ? "common" : "irregular"}`, {})
             .then(
@@ -69,7 +72,8 @@ class Verbs extends React.Component {
                                 questions: item[question],
                                 answers: item[answer]
                             };
-                        })
+                        }),
+                        loading: false,
                     });
                 }.bind(this)
             );
@@ -78,6 +82,7 @@ class Verbs extends React.Component {
     render() {
         return (
             <div>
+                {this.state.loading && <Splash />}
                 <Toggle
                     items={data.map(item => item.name)}
                     callback={this.toggleVerbsSet}
