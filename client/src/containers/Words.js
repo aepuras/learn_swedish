@@ -26,17 +26,20 @@ class Words extends React.Component {
         this.loadData();
     }
 
-    loadData() {
-        this.setState({ loading: true });
-
-        let config = {
+    getAuthHeaders() {
+        const config = {
             headers: {
-                "Content-type": "application/x-www-form-urlencoded",
                 Authorization: "bearer " + Auth.getToken(),
             },
         };
+        return config;
+    }
 
-        axios.get("/api/words", config).then(response => {
+    loadData() {
+        this.setState({ loading: true });
+
+
+        axios.get("/api/words", this.getAuthHeaders()).then(response => {
             console.log(response);
         });
 
@@ -73,7 +76,7 @@ class Words extends React.Component {
     addWord(oldWord, newWord) {
         this.setState({ loading: true });
         axios
-            .post("/openapi/words", { oldWord: oldWord, newWord: newWord })
+            .post("/api/words", { oldWord: oldWord, newWord: newWord }, this.getAuthHeaders())
             .then(() => {
                 this.setState({ loading: false });
             });
