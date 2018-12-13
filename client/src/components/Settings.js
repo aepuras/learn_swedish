@@ -1,18 +1,14 @@
-import React, { Component } from "react";
-import Setting from "./Setting";
+import React, { Component } from 'react';
+import Setting from './Setting';
 import { ThemeContext } from '../theme-context';
-import "./Settings.css";
-import iScroll from "iscroll/build/iscroll-probe";
-import ReactIScroll from "react-iscroll";
+import './Settings.css';
+import iScroll from 'iscroll/build/iscroll-probe';
+import ReactIScroll from 'react-iscroll';
 
 class Settings extends Component {
     constructor(props) {
         super(props);
         this.theScroll = React.createRef();
-    }
-
-    onScrollStart() {
-        console.log("testing");
     }
 
     settingsComponents() {
@@ -34,25 +30,25 @@ class Settings extends Component {
             true,
             function (iScroll) {
                 iScroll.scrollTo(
-                    this.props.title === "Question" ? -100 : -225,
+                    this.props.title === 'Question' ? -100 : -225,
                     0
                 );
             }.bind(this)
         );
     }
 
-    getGradientStyle = (theme, direction) => {
+    getGradientStyle(theme, direction) {
         return ({
             backgroundColor: theme.panelBackground,
             background: `linear-gradient(to ${direction}, ${theme.panelBackground}00, ${theme.panelBackground})`
         });
-    };
+    }
 
     render() {
         return (
             <ThemeContext.Consumer>
                 {({ theme }) => (
-                <div className="settings" style={{ backgroundColor: theme.secondColor }}>
+                    <div className="settings" style={{ backgroundColor: theme.secondColor }}>
                         <div className="title" style={{ color: theme.textColorInverted }}>{this.props.title}</div>
                         <div className="item" style={{ backgroundColor: theme.panelBackground }}>
                             <div className="gradient_start" style={this.getGradientStyle(theme, 'left')} />

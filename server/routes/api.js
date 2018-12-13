@@ -4,18 +4,8 @@ const express = require('express');
 
 const router = new express.Router();
 
-router.get('/dashboard', (req, res) => {
-  res.status(200).json({
-    message: "You're authorized to see this secret message."
-  });
-});
-
-router.get('/categories', (req, res) => {
-    getUserData('categories', req, res);
-});
-
-router.get('/expenses', (req, res) => {
-    getUserData('expenses', req, res);
+router.get('/words', (req, res) => {
+    getUserData('words', req, res);
 });
 
 function getUserData(name, req, res) {

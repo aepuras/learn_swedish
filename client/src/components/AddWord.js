@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { ThemeContext } from '../theme-context';
-import "./AddWord.css";
+import './AddWord.css';
 
 class AddWord extends Component {
     constructor(props) {
@@ -8,6 +8,9 @@ class AddWord extends Component {
         this.state = {
             newWord: this.createEmptyWord()
         };
+
+        this.onChange = this.onChange.bind(this);
+        this.save = this.save.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -21,7 +24,7 @@ class AddWord extends Component {
                         swedish: this.fixArray(
                             this.props.selectedWordForEdit.swedish
                         ),
-                        helper: this.props.selectedWordForEdit.helper || "",
+                        helper: this.props.selectedWordForEdit.helper || '',
                         learned: this.props.selectedWordForEdit.learned || false
                     }
                 });
@@ -31,13 +34,13 @@ class AddWord extends Component {
         }
     }
 
-    fixArray = arr => {
-        return ["", "", ""].map((val, index) => {
+    fixArray(arr) {
+        return ['', '', ''].map((val, index) => {
             return arr.length >= index + 1 ? arr[index] : val;
         });
-    };
+    }
 
-    printRow = (index, theme) => {
+    printRow(index, theme) {
         return (
             <div className="wordRow" key={index}>
                 <div>
@@ -70,23 +73,23 @@ class AddWord extends Component {
                 </div>
             </div>
         );
-    };
+    }
 
-    createEmptyWord = () => {
+    createEmptyWord() {
         return {
-            english: ["", "", ""],
-            swedish: ["", "", ""],
-            helper: "",
+            english: ['', '', ''],
+            swedish: ['', '', ''],
+            helper: '',
             learned: false
         };
-    };
+    }
 
-    onChange = event => {
+    onChange(event) {
         let field = event.target.name;
         let index = -1;
 
-        if (event.target.name.indexOf("-") > 0) {
-            const arr = event.target.name.split("-");
+        if (event.target.name.indexOf('-') > 0) {
+            const arr = event.target.name.split('-');
             field = arr[0];
             index = arr[1];
         }
@@ -98,15 +101,15 @@ class AddWord extends Component {
             newWord[field][index] = value;
         } else {
             newWord[field] =
-                event.target.type === "checkbox" ? event.target.checked : value;
+                event.target.type === 'checkbox' ? event.target.checked : value;
         }
 
         this.setState({
             newWord
         });
-    };
+    }
 
-    save = () => {
+    save() {
         //validate
         const englishWordsCount = this.state.newWord.english.filter(word => word !== '').length;
         const swedishWordCount = this.state.newWord.swedish.filter(word => word !== '').length;
@@ -116,12 +119,12 @@ class AddWord extends Component {
 
         this.props.callback(this.props.selectedWordForEdit, this.state.newWord);
         this.setState({ newWord: this.createEmptyWord() });
-    };
+    }
 
     render() {
         return (
             <ThemeContext.Consumer>
-                {({ theme, toggleTheme }) => (
+                {({ theme }) => (
                     <React.Fragment>
                         <div className="settings" 
                             style={{
@@ -129,7 +132,7 @@ class AddWord extends Component {
                                 borderRadius: theme.rounded
                             }}>
                             <div className="title" style={{ color: theme.textColorInverted }}>
-                                {this.props.editMode ? "Edit" : "Add"} word
+                                {this.props.editMode ? 'Edit' : 'Add'} word
                             </div>
                             <div className="item" style={{ backgroundColor: theme.panelBackground }}>
                                 <div className="wordRows">

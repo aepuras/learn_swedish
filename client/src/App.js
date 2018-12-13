@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import LoginPage from "./containers/LoginPage";
-import MainPage from "./containers/MainPage";
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import LoginPage from './containers/LoginPage';
+import RegisterPage from './containers/RegisterPage';
+import MainPage from './containers/MainPage';
 import {ThemeContext, themes} from './theme-context';
 
 class App extends Component {
@@ -9,28 +10,28 @@ class App extends Component {
         super(props);
     
         this.toggleTheme = themeName => {
-          this.setState(state => ({
-            theme: themes[themeName]
-          }));
+            this.setState({
+                theme: themes[themeName]
+            });
         };
     
         this.state = {
-          theme: themes.dark,
-          toggleTheme: this.toggleTheme,
+            theme: themes.dark,
+            toggleTheme: this.toggleTheme,
         };
-      }
+    }
 
     componentDidMounts() {
         document.addEventListener(
-            "touchmove",
+            'touchmove',
             function(e) {
                 e.preventDefault();
             },
             this.isPassive()
                 ? {
-                      capture: false,
-                      passive: false
-                  }
+                    capture: false,
+                    passive: false
+                }
                 : false
         );
     }
@@ -39,15 +40,17 @@ class App extends Component {
         let supportsPassiveOption = false;
         try {
             document.addEventListener(
-                "test",
+                'test',
                 null,
-                Object.defineProperty({}, "passive", {
+                Object.defineProperty({}, 'passive', {
                     get: function() {
                         supportsPassiveOption = true;
                     }
                 })
             );
-        } catch (e) {}
+        } catch (e) {
+            //nothing here
+        }
         return supportsPassiveOption;
     }
 
@@ -59,6 +62,7 @@ class App extends Component {
                         <div className="App" style={{background: theme.mainColor}}>
                             <Route exact path="/" component={MainPage} />
                             <Route exact path="/login" component={LoginPage} />
+                            <Route exact path="/register" component={RegisterPage} />
                         </div>
                     )}
                 </ThemeContext.Consumer>

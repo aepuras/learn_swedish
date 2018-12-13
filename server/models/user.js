@@ -7,14 +7,11 @@ const UserSchema = new mongoose.Schema({
         index: { unique: true }
     },
     password: String,
-    categories: [{
-        name: String,
-        items: [String]
-    }],
-    expenses: [{
-        date: String,
-        name: String,
-        value: String
+    words: [{
+        swedish: [String],
+        english: [String],
+        helper: String,
+        learned: Boolean
     }]
 });
 

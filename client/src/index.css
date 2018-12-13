@@ -17,8 +17,8 @@ input[type="email"],
 input[type="password"],
 input[type="text"] {
     border: none;
-    border-bottom: solid 2px #0070af;
-    background-color: rgb(152, 186, 202);
+    border-bottom: solid 2px #1e1e1e;
+    background-color: #ddd;
     transition: border 0.3s;
     padding: 5px;
     font-size: 20px;

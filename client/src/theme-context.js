@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const themes = {
     blue: {
@@ -9,7 +9,7 @@ export const themes = {
         textColorInverted: '#0070af',
         panelBackground: '#0083c5',
         rounded: '0.5em',
-        inputColor: "rgb(152, 186, 202)"
+        inputColor: 'rgb(152, 186, 202)'
     },
     light: {
         name: 'light',
@@ -19,7 +19,7 @@ export const themes = {
         textColorInverted: '#fff',
         panelBackground: '#c5ccde',
         rounded: '5px',
-        inputColor: "#ddd"
+        inputColor: '#ddd'
     },
     dark: {
         name: 'dark',
@@ -29,9 +29,9 @@ export const themes = {
         textColorInverted: '#c7c7c7',
         panelBackground: '#383838',
         rounded: '5px',
-        inputColor: "#ddd"
+        inputColor: '#ddd'
     }
-}
+};
 
 export const ThemeContext = React.createContext({
     theme: themes.dark,

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import classnames from "classnames";
+import React, { Component } from 'react';
+import classnames from 'classnames';
 import { ThemeContext } from '../theme-context';
-import "./Toggle.css";
+import './Toggle.css';
 
 class Toggle extends Component {
     constructor(props) {
@@ -9,6 +9,8 @@ class Toggle extends Component {
         this.state = {
             on: this.props.isOn || true
         };
+
+        this.toggle = this.toggle.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -17,7 +19,7 @@ class Toggle extends Component {
         }
     }
 
-    toggle = () => {
+    toggle() {
         const current = this.state.on;
         this.setState({
             on: !current
@@ -25,7 +27,7 @@ class Toggle extends Component {
         this.props.callback && this.props.callback(!current);
     }
 
-    getStyle = (i, theme) => {
+    getStyle(i, theme) {
         if ((i === 0 && this.state.on) || (i === 1 && !this.state.on)) {
             return ({
                 backgroundColor: theme.secondColor,
@@ -39,7 +41,7 @@ class Toggle extends Component {
         }
     }
 
-    renderItem = (item, i, theme) => {
+    renderItem (item, i, theme) {
         return (
             <div
                 key={i}
@@ -59,7 +61,7 @@ class Toggle extends Component {
     render() {
         return (
             <ThemeContext.Consumer>
-                {({ theme, toggleTheme }) => (
+                {({ theme }) => (
                     <div className="toggle" style={{ borderRadius: theme.rounded }}>
                         {this.props.items.map((item, i) => this.renderItem(item, i, theme))}
                     </div>

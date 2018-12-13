@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import axios from "axios-es6";
-import LoginForm from "../components/LoginForm";
-import Splash from "../components/Splash";
-import Auth from "../modules/Auth";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios-es6';
+import LoginForm from '../components/LoginForm';
+import Splash from '../components/Splash';
+import Auth from '../modules/Auth';
 
 class LoginPage extends Component {
     constructor(props) {
@@ -12,8 +12,8 @@ class LoginPage extends Component {
         this.state = {
             errors: {},
             user: {
-                email: "",
-                password: ""
+                email: '',
+                password: ''
             },
             submitted: false,
             loading: false
@@ -37,7 +37,7 @@ class LoginPage extends Component {
 
         this.setState({ loading: true });
         axios
-            .post("/auth/login", this.state.user)
+            .post('/auth/login', this.state.user)
             .then(
                 function(response) {
                     Auth.authenticateUser(response.data.token);

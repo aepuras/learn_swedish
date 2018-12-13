@@ -1,8 +1,8 @@
 input[type="text"],
 input[type="password"] {
 	border: none;
-	border-bottom: solid 2px #0070af;
-	background-color: rgb(152, 186, 202);
+	border-bottom: solid 2px #383838;
+	background-color: #ddd;
 	transition: border 0.3s;
 	width: 100%;
 	padding: 5px;
@@ -12,8 +12,8 @@ input[type="password"] {
 input[type="submit"] {
 	border: none;
 	font-size: 22px;
-	color: #ffffff;
-	background-color: #0083c5;
+	color: #c7c7c7;
+	background-color: #383838;
 	border-radius: 0.5em;
 	font-family: Arial, sans-serif;
 	font-weight: bold;

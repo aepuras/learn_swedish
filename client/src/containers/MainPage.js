@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Verbs from "./Verbs";
-import Words from "./Words";
-import Header from "../components/Header";
+import React, { Component } from 'react';
+import Verbs from './Verbs';
+import Words from './Words';
+import Header from '../components/Header';
 
 class MainPage extends Component {
     constructor(props) {
@@ -9,9 +9,11 @@ class MainPage extends Component {
         this.state = {
             gameType: 'words'
         };
+
+        this.setType = this.setType.bind(this);
     }
 
-    setType = value => {
+    setType(value) {
         this.setState({
             gameType: value
         });

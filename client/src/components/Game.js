@@ -1,58 +1,40 @@
-import React, { Component } from "react";
-import classnames from "classnames";
-import Icon from "./Icon";
-import { ICONS } from "../constants.js";
+import React, { Component } from 'react';
+import classnames from 'classnames';
+import Icon from './Icon';
+import { ICONS } from '../constants.js';
 import { ThemeContext } from '../theme-context';
-import "../App.css";
-import "./Game.css";
+import '../App.css';
+import './Game.css';
 
 class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            answer: "",
-            started: false,
+            answer: '',
             testIndex: 0,
             noOfMistakes: 0,
             showAnswer: false,
             showWrong: false,
-            question: "",
+            question: '',
             noOfWrongs: 0,
             noOfRights: 0,
             excludeLearned: false
         };
+
+        this.toggleExcludeLearned = this.toggleExcludeLearned.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.checkAnswer = this.checkAnswer.bind(this);
+        this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
+        this.toggleEditMode = this.toggleEditMode.bind(this);
     }
 
-    componentWillMount = () => {
-        this.timeOuts = [];
-    };
-
-    componentWillUnmount = () => {
-        this.timeOuts.forEach(clearTimeout);
-    };
-
-    toggleGame = () => {
-        let value = this.state.started;
-        let tstIndex = Math.floor(Math.random() * this.filteredTests().length);
-        this.setState({
-            started: !value,
-            testIndex: tstIndex,
-            question: this.getQuestion(tstIndex),
-            noOfWrongs: 0,
-            noOfRights: 0,
-            showAnswer: false,
-            showWrong: false,
-            answer: ""
-        });
-    };
-
-    filteredTests = () => {
+    filteredTests() {
         return this.state.excludeLearned
             ? this.props.tests.filter(test => !test.learned)
             : this.props.tests;
-    };
+    }
 
-    toggleExcludeLearned = () => {
+    toggleExcludeLearned() {
         this.setState(
             {
                 excludeLearned: !this.state.excludeLearned
@@ -61,9 +43,9 @@ class Game extends Component {
                 this.restartGame(true);
             }
         );
-    };
+    }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (
             this.props.tests &&
             prevProps.tests &&
@@ -76,46 +58,47 @@ class Game extends Component {
         }
     }
 
-    restartGame = changeIndex => {
+    restartGame(changeIndex) {
         let tstIndex = changeIndex
             ? Math.floor(Math.random() * this.filteredTests().length)
             : this.state.testIndex;
         this.setState({
-            started: true,
             testIndex: tstIndex,
-            question: this.getQuestion(tstIndex)
+            question: this.getQuestion(tstIndex),
+            noOfWrongs: 0,
+            noOfRights: 0,
+            showAnswer: false,
+            showWrong: false,
+            answer: ''
         });
-    };
+    }
 
-    randomizeHint = () => {
+    getAnswer() {
         let hints = this.filteredTests()[this.state.testIndex].answers;
         return this.randomArrayItem(hints);
-    };
+    }
 
-    randomNumber = (max) => {
+    randomArrayItem(arr) {
         let rnd = 0;
-        if (max > 1) {
-            rnd = Math.floor(Math.random() * max);
+        if (arr.length > 1) {
+            rnd = Math.floor(Math.random() * arr.length);
         }
-        return rnd;
-    };
-    randomArrayItem = arr => {
-        return arr[this.randomNumber(arr.length)];
-    };
+        return arr[rnd];
+    }
 
-    onChange = e => {
+    onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
-    };
+    }
 
-    getNextIndex = () => {
+    getNextIndex() {
         let nextIndex =
             this.state.testIndex >= this.filteredTests().length - 1
                 ? 0
                 : this.state.testIndex + 1;
         return nextIndex;
-    };
+    }
 
-    checkAnswer = () => {
+    checkAnswer() {
         const test = {
             ...this.filteredTests()[this.state.testIndex],
             answers: this.filteredTests()[this.state.testIndex].answers.map(
@@ -126,7 +109,7 @@ class Game extends Component {
         if (test.answers.includes(this.state.answer.toLowerCase().trim())) {
             let nextIndex = this.getNextIndex();
             this.setState({
-                answer: "",
+                answer: '',
                 noOfMistakes: 0,
                 showAnswer: false,
                 testIndex: nextIndex,
@@ -135,12 +118,12 @@ class Game extends Component {
                     this.state.noOfRights + (this.state.showAnswer ? 0 : 1)
             });
         } else {
-            let mistakes = ++this.state.noOfMistakes;
+            const mistakes = ++this.state.noOfMistakes;
             if (mistakes > 2) {
                 this.setState({
                     noOfMistakes: 0,
                     showAnswer: true,
-                    answer: this.randomizeHint(),
+                    answer: this.getAnswer(),
                     showWrong: false,
                     noOfWrongs: this.state.noOfWrongs + 1
                 });
@@ -152,43 +135,47 @@ class Game extends Component {
             }
         }
         this.answerInput.focus();
-    };
+    }
 
-    getQuestion = index => {
+    getQuestion(index) {
         const questions = this.filteredTests()[index].questions;
         const question = this.randomArrayItem(questions);
         const helper = this.filteredTests()[index].helper || '';
         return `${question} ${helper}`;
-    };
+    }
 
-    handleOnKeyPress = e => {
-        if (e.key === "Enter") {
-            this.checkAnswer();
-        }
-    };
+    handleOnKeyPress(e) {
+        e.key === 'Enter' && this.checkAnswer();
+    }
 
-    toggleEditMode = () => {
-        if (!this.props.editMode) {
-            this.props.toggleEditModeCallback(
-                this.filteredTests()[this.state.testIndex]
-            );
-        } else {
+    toggleEditMode() {
+        if (this.props.editMode) {
             this.props.toggleEditModeCallback();
             this.answerInput.focus();
+        } else {
+            const word = this.filteredTests()[this.state.testIndex];
+            this.props.toggleEditModeCallback(word);
         }
-    };
+    }
 
     render() {
         return (
             <ThemeContext.Consumer>
-                {({ theme, toggleTheme }) => (
+                {({ theme }) => (
                     <div>
-                        <div className="game"
+                        <div
+                            className="game"
                             style={{
                                 backgroundColor: theme.panelBackground,
-                                borderRadius: theme.rounded,
-                            }}>
-                            <div className="question" style={{ color: theme.textColor }}>{this.state.question}</div>
+                                borderRadius: theme.rounded
+                            }}
+                        >
+                            <div
+                                className="question"
+                                style={{ color: theme.textColor }}
+                            >
+                                {this.state.question}
+                            </div>
                             <div className="answer">
                                 <input
                                     placeholder=":answer"
@@ -249,19 +236,24 @@ class Game extends Component {
                                         }
                                     />
                                 </div>
-                                <div className="buttons-icon" onClick={this.toggleGame}>
+                                <div
+                                    className="buttons-icon"
+                                    onClick={() => this.restartGame(true)}
+                                >
                                     <Icon
                                         icon={ICONS.RESET}
                                         size={30}
                                         color={theme.textColor}
                                     />
                                 </div>
-                                <div className="button" 
+                                <div
+                                    className="button"
                                     onClick={this.checkAnswer}
                                     style={{
                                         backgroundColor: theme.panelBackground,
                                         color: theme.textColor
-                                    }}>
+                                    }}
+                                >
                                     Verify
                                 </div>
                             </div>

@@ -1,13 +1,13 @@
-import React from "react";
-import axios from "axios-es6";
-import data from "../data/verbs";
-import Settings from "../components/Settings";
-import Game from "../components/Game";
-import Toggle from "../components/Toggle";
-import Splash from "../components/Splash";
+import React from 'react';
+import axios from 'axios-es6';
+import data from '../data/verbs';
+import Settings from '../components/Settings';
+import Game from '../components/Game';
+import Toggle from '../components/Toggle';
+import Splash from '../components/Splash';
 
-const CURRENT_QUESTION = "presens",
-    CURRENT_ANSWER = "preteritum";
+const CURRENT_QUESTION = 'presens',
+    CURRENT_ANSWER = 'preteritum';
 
 class Verbs extends React.Component {
     constructor(props) {
@@ -17,16 +17,20 @@ class Verbs extends React.Component {
             currentAnswer: CURRENT_ANSWER,
             tests: [],
             commonVerbs: true,
-            loading: false,
+            loading: false
         };
         this.settings = Object.getOwnPropertyNames(data[0].items[0]);
+
+        this.chooseAnswer = this.chooseAnswer.bind(this);
+        this.chooseQuestion = this.chooseQuestion.bind(this);
+        this.toggleVerbsSet = this.toggleVerbsSet.bind(this);
     }
 
     componentDidMount() {
         this.setTests(CURRENT_QUESTION, CURRENT_ANSWER, true);
     }
 
-    chooseQuestion = question => {
+    chooseQuestion(question) {
         this.setState({
             currentQuestion: question
         });
@@ -35,9 +39,9 @@ class Verbs extends React.Component {
             this.state.currentAnswer,
             this.state.commonVerbs
         );
-    };
+    }
 
-    chooseAnswer = answer => {
+    chooseAnswer(answer) {
         this.setState({
             currentAnswer: answer
         });
@@ -46,9 +50,9 @@ class Verbs extends React.Component {
             answer,
             this.state.commonVerbs
         );
-    };
+    }
 
-    toggleVerbsSet = () => {
+    toggleVerbsSet() {
         const commonVerbs = !this.state.commonVerbs;
         this.setState({
             commonVerbs: commonVerbs
@@ -58,12 +62,12 @@ class Verbs extends React.Component {
             this.state.currentAnswer,
             commonVerbs
         );
-    };
+    }
 
-    setTests = (question, answer, commonVerbs) => {
+    setTests(question, answer, commonVerbs) {
         this.setState({ loading: true });
         axios
-            .get(`/openapi/verbs/${commonVerbs ? "common" : "irregular"}`, {})
+            .get(`/openapi/verbs/${commonVerbs ? 'common' : 'irregular'}`, {})
             .then(
                 function(response) {
                     this.setState({
@@ -73,11 +77,11 @@ class Verbs extends React.Component {
                                 answers: item[answer]
                             };
                         }),
-                        loading: false,
+                        loading: false
                     });
                 }.bind(this)
             );
-    };
+    }
 
     render() {
         return (
