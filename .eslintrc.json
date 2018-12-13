@@ -14,27 +14,13 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react"],
     "rules": {
         "no-console": "off",
-        "indent": [
-            "error",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "react/prop-types": [0]

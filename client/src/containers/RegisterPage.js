@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import RegisterForm from '../components/RegisterForm';
-import Splash from '../components/Splash';
-import axios from 'axios-es6';
+import React, { Component } from "react";
+import RegisterForm from "../components/RegisterForm";
+import Splash from "../components/Splash";
+import axios from "axios-es6";
 
 class RegisterPage extends Component {
     constructor(props) {
@@ -10,11 +10,11 @@ class RegisterPage extends Component {
         this.state = {
             errors: {},
             user: {
-                email: '',
-                password: '',
+                email: "",
+                password: "",
             },
             loading: false,
-            successMessage: ''
+            successMessage: "",
         };
 
         this.processForm = this.processForm.bind(this);
@@ -26,41 +26,48 @@ class RegisterPage extends Component {
         const user = this.state.user;
         user[field] = event.target.value;
         this.setState({
-            user
+            user,
         });
     }
 
     processForm(event) {
         event.preventDefault();
 
-        axios.post('/auth/signup', this.state.user)
-            .then(function() {
-                this.setState({
-                    errors: {},
-                    loading: false,
-                    successMessage: 'Account created!',
-                    user: {
-                        email: '',
-                        password: ''
-                    }
-                });
-            }.bind(this))
-            .catch(function(response) {
-                const errors = response.data.errors;
-                errors.summary = response.data.message;
-                this.setState({
-                    errors: errors,
-                    loading: false,
-                    successMessage: ''
-                });
-            }.bind(this));
+        axios
+            .post("/auth/signup", this.state.user)
+            .then(
+                function() {
+                    this.setState({
+                        errors: {},
+                        loading: false,
+                        successMessage: "Account created!",
+                        user: {
+                            email: "",
+                            password: "",
+                        },
+                    });
+                }.bind(this)
+            )
+            .catch(
+                function(response) {
+                    const errors = response.data.errors;
+                    errors.summary = response.data.message;
+                    this.setState({
+                        errors: errors,
+                        loading: false,
+                        successMessage: "",
+                    });
+                }.bind(this)
+            );
     }
 
     render() {
         return (
             <div>
-                {this.state.loading && <Splash/>}
-                {this.state.successMessage.length > 0 && <div className="success">{this.state.successMessage}</div>}
+                {this.state.loading && <Splash />}
+                {this.state.successMessage.length > 0 && (
+                    <div className="success">{this.state.successMessage}</div>
+                )}
                 <RegisterForm
                     onSubmit={this.processForm}
                     onChange={this.changeUser}

@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const Icon = props => {
     const styles = {
         svg: {
-            display: 'inline-block',
-            verticalAlign: 'middle',
+            display: "inline-block",
+            verticalAlign: "middle",
         },
         path: {
             fill: props.color,
@@ -19,10 +19,7 @@ const Icon = props => {
             height={`${props.size}px`}
             viewBox="0 0 1024 1024"
         >
-            <path
-                style={styles.path}
-                d={props.icon}
-            ></path>
+            <path style={styles.path} d={props.icon} />
         </svg>
     );
 };
@@ -38,4 +35,3 @@ Icon.defaultProps = {
 };
 
 export default Icon;
-

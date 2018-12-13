@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import './LoginForm.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import "./LoginForm.css";
 
 const LoginForm = ({ onSubmit, onChange, errors, user }) => (
     <React.Fragment>
@@ -11,7 +11,7 @@ const LoginForm = ({ onSubmit, onChange, errors, user }) => (
                 {errors.summary && (
                     <p className="error-message">{errors.summary}</p>
                 )}
-                <div className={classnames('field', { error: !!errors.email })}>
+                <div className={classnames("field", { error: !!errors.email })}>
                     <input
                         className="login-input-field"
                         type="text"
@@ -25,8 +25,8 @@ const LoginForm = ({ onSubmit, onChange, errors, user }) => (
                 </div>
 
                 <div
-                    className={classnames('field', {
-                        error: !!errors.password
+                    className={classnames("field", {
+                        error: !!errors.password,
                     })}
                 >
                     <input
@@ -55,7 +55,7 @@ LoginForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
 };
 
 export default LoginForm;

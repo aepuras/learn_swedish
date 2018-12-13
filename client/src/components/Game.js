@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import Icon from './Icon';
-import { ICONS } from '../constants.js';
-import { ThemeContext } from '../theme-context';
-import '../App.css';
-import './Game.css';
+import React, { Component } from "react";
+import classnames from "classnames";
+import Icon from "./Icon";
+import { ICONS } from "../constants.js";
+import { ThemeContext } from "../theme-context";
+import "../App.css";
+import "./Game.css";
 
 class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            answer: '',
+            answer: "",
             testIndex: 0,
             noOfMistakes: 0,
             showAnswer: false,
             showWrong: false,
-            question: '',
+            question: "",
             noOfWrongs: 0,
             noOfRights: 0,
-            excludeLearned: false
+            excludeLearned: false,
         };
 
         this.toggleExcludeLearned = this.toggleExcludeLearned.bind(this);
@@ -37,7 +37,7 @@ class Game extends Component {
     toggleExcludeLearned() {
         this.setState(
             {
-                excludeLearned: !this.state.excludeLearned
+                excludeLearned: !this.state.excludeLearned,
             },
             () => {
                 this.restartGame(true);
@@ -69,7 +69,7 @@ class Game extends Component {
             noOfRights: 0,
             showAnswer: false,
             showWrong: false,
-            answer: ''
+            answer: "",
         });
     }
 
@@ -103,19 +103,19 @@ class Game extends Component {
             ...this.filteredTests()[this.state.testIndex],
             answers: this.filteredTests()[this.state.testIndex].answers.map(
                 answer => answer.toLowerCase()
-            )
+            ),
         };
         this.setState({ showWrong: false });
         if (test.answers.includes(this.state.answer.toLowerCase().trim())) {
             let nextIndex = this.getNextIndex();
             this.setState({
-                answer: '',
+                answer: "",
                 noOfMistakes: 0,
                 showAnswer: false,
                 testIndex: nextIndex,
                 question: this.getQuestion(nextIndex),
                 noOfRights:
-                    this.state.noOfRights + (this.state.showAnswer ? 0 : 1)
+                    this.state.noOfRights + (this.state.showAnswer ? 0 : 1),
             });
         } else {
             const mistakes = ++this.state.noOfMistakes;
@@ -125,12 +125,12 @@ class Game extends Component {
                     showAnswer: true,
                     answer: this.getAnswer(),
                     showWrong: false,
-                    noOfWrongs: this.state.noOfWrongs + 1
+                    noOfWrongs: this.state.noOfWrongs + 1,
                 });
             } else {
                 this.setState({
                     showWrong: true,
-                    noOfMistakes: mistakes
+                    noOfMistakes: mistakes,
                 });
             }
         }
@@ -140,12 +140,12 @@ class Game extends Component {
     getQuestion(index) {
         const questions = this.filteredTests()[index].questions;
         const question = this.randomArrayItem(questions);
-        const helper = this.filteredTests()[index].helper || '';
+        const helper = this.filteredTests()[index].helper || "";
         return `${question} ${helper}`;
     }
 
     handleOnKeyPress(e) {
-        e.key === 'Enter' && this.checkAnswer();
+        e.key === "Enter" && this.checkAnswer();
     }
 
     toggleEditMode() {
@@ -167,7 +167,7 @@ class Game extends Component {
                             className="game"
                             style={{
                                 backgroundColor: theme.panelBackground,
-                                borderRadius: theme.rounded
+                                borderRadius: theme.rounded,
                             }}
                         >
                             <div
@@ -188,7 +188,7 @@ class Game extends Component {
                                     )}
                                     style={{
                                         borderBottomColor: theme.mainColor,
-                                        backgroundColor: theme.inputColor
+                                        backgroundColor: theme.inputColor,
                                     }}
                                     ref={ip => (this.answerInput = ip)}
                                     type="text"
@@ -251,7 +251,7 @@ class Game extends Component {
                                     onClick={this.checkAnswer}
                                     style={{
                                         backgroundColor: theme.panelBackground,
-                                        color: theme.textColor
+                                        color: theme.textColor,
                                     }}
                                 >
                                     Verify

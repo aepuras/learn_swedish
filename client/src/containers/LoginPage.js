@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios-es6';
-import LoginForm from '../components/LoginForm';
-import Splash from '../components/Splash';
-import Auth from '../modules/Auth';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import axios from "axios-es6";
+import LoginForm from "../components/LoginForm";
+import Splash from "../components/Splash";
+import Auth from "../modules/Auth";
 
 class LoginPage extends Component {
     constructor(props) {
@@ -12,11 +12,11 @@ class LoginPage extends Component {
         this.state = {
             errors: {},
             user: {
-                email: '',
-                password: ''
+                email: "",
+                password: "",
             },
             submitted: false,
-            loading: false
+            loading: false,
         };
 
         this.processForm = this.processForm.bind(this);
@@ -28,7 +28,7 @@ class LoginPage extends Component {
         const user = this.state.user;
         user[field] = event.target.value;
         this.setState({
-            user
+            user,
         });
     }
 
@@ -37,14 +37,14 @@ class LoginPage extends Component {
 
         this.setState({ loading: true });
         axios
-            .post('/auth/login', this.state.user)
+            .post("/auth/login", this.state.user)
             .then(
                 function(response) {
                     Auth.authenticateUser(response.data.token);
                     this.setState({
                         errors: {},
                         submitted: true,
-                        loading: false
+                        loading: false,
                     });
                 }.bind(this)
             )
@@ -56,7 +56,7 @@ class LoginPage extends Component {
                     errors.summary = response.data.message;
                     this.setState({
                         errors: errors,
-                        loading: false
+                        loading: false,
                     });
                 }.bind(this)
             );

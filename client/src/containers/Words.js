@@ -1,10 +1,10 @@
-import React from 'react';
-import axios from 'axios-es6';
-import Game from '../components/Game';
-import AddWord from '../components/AddWord';
-import Toggle from '../components/Toggle';
-import Splash from '../components/Splash';
-import Auth from '../modules/Auth';
+import React from "react";
+import axios from "axios-es6";
+import Game from "../components/Game";
+import AddWord from "../components/AddWord";
+import Toggle from "../components/Toggle";
+import Splash from "../components/Splash";
+import Auth from "../modules/Auth";
 
 class Words extends React.Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class Words extends React.Component {
             toEnglish: true,
             selectedWordForEdit: {},
             editMode: false,
-            loading: false
+            loading: false,
         };
 
         this.addWord = this.addWord.bind(this);
@@ -31,16 +31,16 @@ class Words extends React.Component {
 
         let config = {
             headers: {
-                'Content-type': 'application/x-www-form-urlencoded',
-                'Authorization': 'bearer ' + Auth.getToken()
-            }
+                "Content-type": "application/x-www-form-urlencoded",
+                Authorization: "bearer " + Auth.getToken(),
+            },
         };
 
-        axios.get('/api/words', config).then(response => {
+        axios.get("/api/words", config).then(response => {
             console.log(response);
         });
 
-        axios.get('/openapi/words', {}).then(response => {
+        axios.get("/openapi/words", {}).then(response => {
             this.setState({
                 tests: this.shuffleArray(
                     response.data.words.map(item => {
@@ -52,16 +52,16 @@ class Words extends React.Component {
                             answers: this.state.toEnglish
                                 ? item.english
                                 : item.swedish,
-                            learned: item.learned
+                            learned: item.learned,
                         };
                     })
                 ),
-                loading: false
+                loading: false,
             });
         });
     }
 
-    shuffleArray (arr) {
+    shuffleArray(arr) {
         let a = arr.slice(0);
         for (let i = a.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -73,7 +73,7 @@ class Words extends React.Component {
     addWord(oldWord, newWord) {
         this.setState({ loading: true });
         axios
-            .post('/openapi/words', { oldWord: oldWord, newWord: newWord })
+            .post("/openapi/words", { oldWord: oldWord, newWord: newWord })
             .then(() => {
                 this.setState({ loading: false });
             });
@@ -87,7 +87,7 @@ class Words extends React.Component {
         if (word) {
             w.english = this.state.toEnglish ? word.answers : word.questions;
             w.swedish = this.state.toEnglish ? word.questions : word.answers;
-            w.helper = word.helper || '';
+            w.helper = word.helper || "";
             w.learned = word.learned || false;
             editMode = true;
         }
@@ -102,10 +102,10 @@ class Words extends React.Component {
                     helper: item.helper,
                     questions: item.answers,
                     answers: item.questions,
-                    learned: item.learned
+                    learned: item.learned,
                 };
             }),
-            toEnglish: !this.state.toEnglish
+            toEnglish: !this.state.toEnglish,
         });
     }
 
@@ -114,7 +114,7 @@ class Words extends React.Component {
             <div>
                 {this.state.loading && <Splash />}
                 <Toggle
-                    items={['to english', 'to swedish']}
+                    items={["to english", "to swedish"]}
                     callback={this.toggleToFrom}
                     isOn={this.state.toEnglish}
                 />

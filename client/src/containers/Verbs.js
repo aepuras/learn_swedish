@@ -1,13 +1,13 @@
-import React from 'react';
-import axios from 'axios-es6';
-import data from '../data/verbs';
-import Settings from '../components/Settings';
-import Game from '../components/Game';
-import Toggle from '../components/Toggle';
-import Splash from '../components/Splash';
+import React from "react";
+import axios from "axios-es6";
+import data from "../data/verbs";
+import Settings from "../components/Settings";
+import Game from "../components/Game";
+import Toggle from "../components/Toggle";
+import Splash from "../components/Splash";
 
-const CURRENT_QUESTION = 'presens',
-    CURRENT_ANSWER = 'preteritum';
+const CURRENT_QUESTION = "presens",
+    CURRENT_ANSWER = "preteritum";
 
 class Verbs extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Verbs extends React.Component {
             currentAnswer: CURRENT_ANSWER,
             tests: [],
             commonVerbs: true,
-            loading: false
+            loading: false,
         };
         this.settings = Object.getOwnPropertyNames(data[0].items[0]);
 
@@ -32,7 +32,7 @@ class Verbs extends React.Component {
 
     chooseQuestion(question) {
         this.setState({
-            currentQuestion: question
+            currentQuestion: question,
         });
         this.setTests(
             question,
@@ -43,7 +43,7 @@ class Verbs extends React.Component {
 
     chooseAnswer(answer) {
         this.setState({
-            currentAnswer: answer
+            currentAnswer: answer,
         });
         this.setTests(
             this.state.currentQuestion,
@@ -55,7 +55,7 @@ class Verbs extends React.Component {
     toggleVerbsSet() {
         const commonVerbs = !this.state.commonVerbs;
         this.setState({
-            commonVerbs: commonVerbs
+            commonVerbs: commonVerbs,
         });
         this.setTests(
             this.state.currentQuestion,
@@ -67,17 +67,17 @@ class Verbs extends React.Component {
     setTests(question, answer, commonVerbs) {
         this.setState({ loading: true });
         axios
-            .get(`/openapi/verbs/${commonVerbs ? 'common' : 'irregular'}`, {})
+            .get(`/openapi/verbs/${commonVerbs ? "common" : "irregular"}`, {})
             .then(
                 function(response) {
                     this.setState({
                         tests: response.data.map(item => {
                             return {
                                 questions: item[question],
-                                answers: item[answer]
+                                answers: item[answer],
                             };
                         }),
-                        loading: false
+                        loading: false,
                     });
                 }.bind(this)
             );

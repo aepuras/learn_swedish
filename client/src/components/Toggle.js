@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import { ThemeContext } from '../theme-context';
-import './Toggle.css';
+import React, { Component } from "react";
+import classnames from "classnames";
+import { ThemeContext } from "../theme-context";
+import "./Toggle.css";
 
 class Toggle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            on: this.props.isOn || true
+            on: this.props.isOn || true,
         };
 
         this.toggle = this.toggle.bind(this);
@@ -22,33 +22,33 @@ class Toggle extends Component {
     toggle() {
         const current = this.state.on;
         this.setState({
-            on: !current
+            on: !current,
         });
         this.props.callback && this.props.callback(!current);
     }
 
     getStyle(i, theme) {
         if ((i === 0 && this.state.on) || (i === 1 && !this.state.on)) {
-            return ({
+            return {
                 backgroundColor: theme.secondColor,
-                color: theme.textColorInverted
-            });
+                color: theme.textColorInverted,
+            };
         } else {
-            return ({
+            return {
                 backgroundColor: theme.panelBackground,
-                color: theme.textColor
-            });
+                color: theme.textColor,
+            };
         }
     }
 
-    renderItem (item, i, theme) {
+    renderItem(item, i, theme) {
         return (
             <div
                 key={i}
                 className={classnames({
                     active:
                         (i === 0 && this.state.on) ||
-                        (i === 1 && !this.state.on)
+                        (i === 1 && !this.state.on),
                 })}
                 style={this.getStyle(i, theme)}
                 onClick={this.toggle}
@@ -62,12 +62,16 @@ class Toggle extends Component {
         return (
             <ThemeContext.Consumer>
                 {({ theme }) => (
-                    <div className="toggle" style={{ borderRadius: theme.rounded }}>
-                        {this.props.items.map((item, i) => this.renderItem(item, i, theme))}
+                    <div
+                        className="toggle"
+                        style={{ borderRadius: theme.rounded }}
+                    >
+                        {this.props.items.map((item, i) =>
+                            this.renderItem(item, i, theme)
+                        )}
                     </div>
                 )}
             </ThemeContext.Consumer>
-
         );
     }
 }

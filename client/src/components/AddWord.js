@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { ThemeContext } from '../theme-context';
-import './AddWord.css';
+import React, { Component } from "react";
+import { ThemeContext } from "../theme-context";
+import "./AddWord.css";
 
 class AddWord extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newWord: this.createEmptyWord()
+            newWord: this.createEmptyWord(),
         };
 
         this.onChange = this.onChange.bind(this);
@@ -24,9 +24,10 @@ class AddWord extends Component {
                         swedish: this.fixArray(
                             this.props.selectedWordForEdit.swedish
                         ),
-                        helper: this.props.selectedWordForEdit.helper || '',
-                        learned: this.props.selectedWordForEdit.learned || false
-                    }
+                        helper: this.props.selectedWordForEdit.helper || "",
+                        learned:
+                            this.props.selectedWordForEdit.learned || false,
+                    },
                 });
             } else {
                 this.setState({ newWord: this.createEmptyWord() });
@@ -35,7 +36,7 @@ class AddWord extends Component {
     }
 
     fixArray(arr) {
-        return ['', '', ''].map((val, index) => {
+        return ["", "", ""].map((val, index) => {
             return arr.length >= index + 1 ? arr[index] : val;
         });
     }
@@ -53,7 +54,7 @@ class AddWord extends Component {
                         value={this.state.newWord.english[index]}
                         style={{
                             borderBottomColor: theme.mainColor,
-                            backgroundColor: theme.inputColor
+                            backgroundColor: theme.inputColor,
                         }}
                     />
                 </div>
@@ -67,7 +68,7 @@ class AddWord extends Component {
                         value={this.state.newWord.swedish[index]}
                         style={{
                             borderBottomColor: theme.mainColor,
-                            backgroundColor: theme.inputColor
+                            backgroundColor: theme.inputColor,
                         }}
                     />
                 </div>
@@ -77,10 +78,10 @@ class AddWord extends Component {
 
     createEmptyWord() {
         return {
-            english: ['', '', ''],
-            swedish: ['', '', ''],
-            helper: '',
-            learned: false
+            english: ["", "", ""],
+            swedish: ["", "", ""],
+            helper: "",
+            learned: false,
         };
     }
 
@@ -88,8 +89,8 @@ class AddWord extends Component {
         let field = event.target.name;
         let index = -1;
 
-        if (event.target.name.indexOf('-') > 0) {
-            const arr = event.target.name.split('-');
+        if (event.target.name.indexOf("-") > 0) {
+            const arr = event.target.name.split("-");
             field = arr[0];
             index = arr[1];
         }
@@ -101,18 +102,22 @@ class AddWord extends Component {
             newWord[field][index] = value;
         } else {
             newWord[field] =
-                event.target.type === 'checkbox' ? event.target.checked : value;
+                event.target.type === "checkbox" ? event.target.checked : value;
         }
 
         this.setState({
-            newWord
+            newWord,
         });
     }
 
     save() {
         //validate
-        const englishWordsCount = this.state.newWord.english.filter(word => word !== '').length;
-        const swedishWordCount = this.state.newWord.swedish.filter(word => word !== '').length;
+        const englishWordsCount = this.state.newWord.english.filter(
+            word => word !== ""
+        ).length;
+        const swedishWordCount = this.state.newWord.swedish.filter(
+            word => word !== ""
+        ).length;
         if (englishWordsCount === 0 || swedishWordCount === 0) {
             return false;
         }
@@ -126,17 +131,29 @@ class AddWord extends Component {
             <ThemeContext.Consumer>
                 {({ theme }) => (
                     <React.Fragment>
-                        <div className="settings" 
+                        <div
+                            className="settings"
                             style={{
                                 backgroundColor: theme.secondColor,
-                                borderRadius: theme.rounded
-                            }}>
-                            <div className="title" style={{ color: theme.textColorInverted }}>
-                                {this.props.editMode ? 'Edit' : 'Add'} word
+                                borderRadius: theme.rounded,
+                            }}
+                        >
+                            <div
+                                className="title"
+                                style={{ color: theme.textColorInverted }}
+                            >
+                                {this.props.editMode ? "Edit" : "Add"} word
                             </div>
-                            <div className="item" style={{ backgroundColor: theme.panelBackground }}>
+                            <div
+                                className="item"
+                                style={{
+                                    backgroundColor: theme.panelBackground,
+                                }}
+                            >
                                 <div className="wordRows">
-                                    {[0, 1, 2].map(index => this.printRow(index, theme))}
+                                    {[0, 1, 2].map(index =>
+                                        this.printRow(index, theme)
+                                    )}
                                     <div className="wordRow">
                                         <div>
                                             <input
@@ -144,21 +161,35 @@ class AddWord extends Component {
                                                 type="text"
                                                 id="helper"
                                                 name="helper"
-                                                value={this.state.newWord.helper}
+                                                value={
+                                                    this.state.newWord.helper
+                                                }
                                                 onChange={this.onChange}
                                                 style={{
-                                                    borderBottomColor: theme.mainColor,
-                                                    backgroundColor: theme.inputColor
+                                                    borderBottomColor:
+                                                        theme.mainColor,
+                                                    backgroundColor:
+                                                        theme.inputColor,
                                                 }}
                                             />
                                         </div>
                                         <div className="learned">
-                                            <label style={{ color: theme.textColor }}>
+                                            <label
+                                                style={{
+                                                    color: theme.textColor,
+                                                }}
+                                            >
                                                 <input
                                                     type="checkbox"
                                                     name="learned"
-                                                    checked={this.state.newWord.learned}
-                                                    value={this.state.newWord.learned}
+                                                    checked={
+                                                        this.state.newWord
+                                                            .learned
+                                                    }
+                                                    value={
+                                                        this.state.newWord
+                                                            .learned
+                                                    }
                                                     onChange={this.onChange}
                                                 />
                                                 learned
@@ -169,12 +200,14 @@ class AddWord extends Component {
                             </div>
                         </div>
                         <div className="addWord">
-                            <div className="button" 
+                            <div
+                                className="button"
                                 onClick={this.save}
                                 style={{
                                     backgroundColor: theme.panelBackground,
-                                    color: theme.textColor
-                                }}>
+                                    color: theme.textColor,
+                                }}
+                            >
                                 Save
                             </div>
                         </div>
