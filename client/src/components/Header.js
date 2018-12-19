@@ -4,6 +4,7 @@ import classnames from "classnames";
 import Icon from "./Icon";
 import { ICONS } from "../constants.js";
 import { ThemeContext } from "../theme-context";
+import { LanguageContext } from "../language-context";
 import "./Header.css";
 
 class Header extends Component {
@@ -36,8 +37,8 @@ class Header extends Component {
         this.toggleVisible();
     }
 
-    themeClick(e, toggleTheme) {
-        toggleTheme(e.currentTarget.innerHTML);
+    contextClick(e, toggleContext) {
+        toggleContext(e.currentTarget.innerHTML);
         this.toggleVisible();
     }
 
@@ -45,134 +46,175 @@ class Header extends Component {
         return (
             <ThemeContext.Consumer>
                 {({ theme, toggleTheme }) => (
-                    <header
-                        className={classnames("header", {
-                            showMenu: this.state.visible,
-                        })}
-                        style={{ backgroundColor: theme.mainColor }}
-                    >
-                        <div className="logo">
-                            <Icon
-                                icon={ICONS.FLAME}
-                                size={30}
-                                color={theme.secondColor}
-                            />
-                        </div>
-                        <div className="menu-icon" onClick={this.toggleVisible}>
-                            <span
-                                className="navicon"
-                                style={{ backgroundColor: theme.secondColor }}
+                    <LanguageContext.Consumer>
+                        {({ language, toggleLanguage }) => (
+                            <header
+                                className={classnames("header", {
+                                    showMenu: this.state.visible,
+                                })}
+                                style={{ backgroundColor: theme.mainColor }}
                             >
-                                <span
-                                    className="navicon-before"
+                                <div className="logo">
+                                    <Icon
+                                        icon={ICONS.FLAME}
+                                        size={30}
+                                        color={theme.secondColor}
+                                    />
+                                </div>
+                                <div
+                                    className="menu-icon"
+                                    onClick={this.toggleVisible}
+                                >
+                                    <span
+                                        className="navicon"
+                                        style={{
+                                            backgroundColor: theme.secondColor,
+                                        }}
+                                    >
+                                        <span
+                                            className="navicon-before"
+                                            style={{
+                                                backgroundColor:
+                                                    theme.secondColor,
+                                            }}
+                                        />
+                                        <span
+                                            className="navicon-after"
+                                            style={{
+                                                backgroundColor:
+                                                    theme.secondColor,
+                                            }}
+                                        />
+                                    </span>
+                                </div>
+                                <ul
+                                    className="menu"
                                     style={{
-                                        backgroundColor: theme.secondColor,
+                                        backgroundColor: theme.panelBackground,
+                                        color: theme.textColor,
                                     }}
-                                />
-                                <span
-                                    className="navicon-after"
-                                    style={{
-                                        backgroundColor: theme.secondColor,
-                                    }}
-                                />
-                            </span>
-                        </div>
-                        <ul
-                            className="menu"
-                            style={{
-                                backgroundColor: theme.panelBackground,
-                                color: theme.textColor,
-                            }}
-                        >
-                            <li
-                                className="title"
-                                style={{
-                                    backgroundColor: theme.secondColor,
-                                    color: theme.mainColor,
-                                }}
-                            >
-                                Game Type
-                            </li>
-                            <li
-                                onClick={this.itemClick}
-                                className={classnames({
-                                    active: this.props.selectedType === "words",
-                                })}
-                            >
-                                words
-                            </li>
-                            <li
-                                onClick={this.itemClick}
-                                className={classnames({
-                                    active: this.props.selectedType === "verbs",
-                                })}
-                            >
-                                verbs
-                            </li>
-                            <li
-                                className="title"
-                                style={{
-                                    backgroundColor: theme.secondColor,
-                                    color: theme.mainColor,
-                                }}
-                            >
-                                Language
-                            </li>
-                            <li onClick={this.itemClick}>english</li>
-                            <li onClick={this.itemClick}>romanian</li>
-                            <li
-                                className="title"
-                                style={{
-                                    backgroundColor: theme.secondColor,
-                                    color: theme.mainColor,
-                                }}
-                            >
-                                Theme
-                            </li>
-                            <li
-                                onClick={e => {
-                                    this.themeClick(e, toggleTheme);
-                                }}
-                                className={classnames({
-                                    active: theme.name === "blue",
-                                })}
-                            >
-                                blue
-                            </li>
-                            <li
-                                onClick={e => {
-                                    this.themeClick(e, toggleTheme);
-                                }}
-                                className={classnames({
-                                    active: theme.name === "light",
-                                })}
-                            >
-                                light
-                            </li>
-                            <li
-                                onClick={e => {
-                                    this.themeClick(e, toggleTheme);
-                                }}
-                                className={classnames({
-                                    active: theme.name === "dark",
-                                })}
-                            >
-                                dark
-                            </li>
-                            <li
-                                className="title"
-                                style={{
-                                    backgroundColor: theme.secondColor,
-                                    color: theme.mainColor,
-                                }}
-                            >
-                                Account
-                            </li>
-                            <li>
-                                <Link to="/logout">Logout</Link>
-                            </li>
-                        </ul>
-                    </header>
+                                >
+                                    <li
+                                        className="title"
+                                        style={{
+                                            backgroundColor: theme.secondColor,
+                                            color: theme.mainColor,
+                                        }}
+                                    >
+                                        Game Type
+                                    </li>
+                                    <li
+                                        onClick={this.itemClick}
+                                        className={classnames({
+                                            active:
+                                                this.props.selectedType ===
+                                                "words",
+                                        })}
+                                    >
+                                        {language.words}
+                                    </li>
+                                    <li
+                                        onClick={this.itemClick}
+                                        className={classnames({
+                                            active:
+                                                this.props.selectedType ===
+                                                "verbs",
+                                        })}
+                                    >
+                                        {language.verbs}
+                                    </li>
+                                    <li
+                                        className="title"
+                                        style={{
+                                            backgroundColor: theme.secondColor,
+                                            color: theme.mainColor,
+                                        }}
+                                    >
+                                        Language
+                                    </li>
+                                    <li
+                                        onClick={e => {
+                                            this.contextClick(
+                                                e,
+                                                toggleLanguage
+                                            );
+                                        }}
+                                        className={classnames({
+                                            active:
+                                                language.name === "english",
+                                        })}
+                                    >
+                                        english
+                                    </li>
+                                    <li
+                                        onClick={e => {
+                                            this.contextClick(
+                                                e,
+                                                toggleLanguage
+                                            );
+                                        }}
+                                        className={classnames({
+                                            active:
+                                                language.name === "romanian",
+                                        })}
+                                    >
+                                        romanian
+                                    </li>
+                                    <li
+                                        className="title"
+                                        style={{
+                                            backgroundColor: theme.secondColor,
+                                            color: theme.mainColor,
+                                        }}
+                                    >
+                                        Theme
+                                    </li>
+                                    <li
+                                        onClick={e => {
+                                            this.contextClick(e, toggleTheme);
+                                        }}
+                                        className={classnames({
+                                            active: theme.name === "blue",
+                                        })}
+                                    >
+                                        blue
+                                    </li>
+                                    <li
+                                        onClick={e => {
+                                            this.contextClick(e, toggleTheme);
+                                        }}
+                                        className={classnames({
+                                            active: theme.name === "light",
+                                        })}
+                                    >
+                                        light
+                                    </li>
+                                    <li
+                                        onClick={e => {
+                                            this.contextClick(e, toggleTheme);
+                                        }}
+                                        className={classnames({
+                                            active: theme.name === "dark",
+                                        })}
+                                    >
+                                        dark
+                                    </li>
+                                    <li
+                                        className="title"
+                                        style={{
+                                            backgroundColor: theme.secondColor,
+                                            color: theme.mainColor,
+                                        }}
+                                    >
+                                        Account
+                                    </li>
+                                    <li>
+                                        <Link to="/logout">Logout</Link>
+                                    </li>
+                                </ul>
+                            </header>
+                        )}
+                    </LanguageContext.Consumer>
                 )}
             </ThemeContext.Consumer>
         );

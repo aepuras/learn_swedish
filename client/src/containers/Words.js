@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios-es6";
+import { Redirect } from "react-router-dom";
 import Game from "../components/Game";
 import AddWord from "../components/AddWord";
 import Toggle from "../components/Toggle";
@@ -15,6 +16,7 @@ class Words extends React.Component {
             selectedWordForEdit: {},
             editMode: false,
             loading: false,
+            authorized: true,
         };
 
         this.addWord = this.addWord.bind(this);
@@ -37,16 +39,10 @@ class Words extends React.Component {
 
     loadData() {
         this.setState({ loading: true });
-
-
         axios.get("/api/words", this.getAuthHeaders()).then(response => {
-            console.log(response);
-        });
-
-        axios.get("/openapi/words", {}).then(response => {
             this.setState({
                 tests: this.shuffleArray(
-                    response.data.words.map(item => {
+                    response.data.items.map(item => {
                         return {
                             helper: item.helper,
                             questions: this.state.toEnglish
@@ -60,6 +56,11 @@ class Words extends React.Component {
                     })
                 ),
                 loading: false,
+            });
+        }).catch(error => {
+            this.setState({ 
+                authorized: (error.status !== 401),
+                loading: false 
             });
         });
     }
@@ -112,10 +113,13 @@ class Words extends React.Component {
         });
     }
 
-    render() {
+    printAuthorized() {
+        return this.state.loading ? <Splash /> : this.printGame();
+    }
+
+    printGame() {
         return (
             <div>
-                {this.state.loading && <Splash />}
                 <Toggle
                     items={["to english", "to swedish"]}
                     callback={this.toggleToFrom}
@@ -133,6 +137,10 @@ class Words extends React.Component {
                 />
             </div>
         );
+    }
+
+    render() {
+        return this.state.authorized ? this.printAuthorized() : <Redirect to="/login" />;
     }
 }
 

@@ -45,6 +45,10 @@ class Game extends Component {
         );
     }
 
+    componentDidMount() {
+        this.props.tests.length > 0 && this.restartGame(false);
+    }
+
     componentDidUpdate(prevProps) {
         if (
             this.props.tests &&
@@ -117,6 +121,7 @@ class Game extends Component {
                 noOfRights:
                     this.state.noOfRights + (this.state.showAnswer ? 0 : 1),
             });
+            this.props.editMode && this.props.toggleEditModeCallback();
         } else {
             const mistakes = ++this.state.noOfMistakes;
             if (mistakes > 2) {
@@ -150,13 +155,8 @@ class Game extends Component {
     }
 
     toggleEditMode() {
-        if (this.props.editMode) {
-            this.props.toggleEditModeCallback();
-            this.answerInput.focus();
-        } else {
-            const word = this.filteredTests()[this.state.testIndex];
-            this.props.toggleEditModeCallback(word);
-        }
+        this.props.toggleEditModeCallback(this.props.editMode ? null : this.filteredTests()[this.state.testIndex]);
+        this.answerInput.focus();
     }
 
     render() {

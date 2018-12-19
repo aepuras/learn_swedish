@@ -5,6 +5,7 @@ import RegisterPage from "./containers/RegisterPage";
 import MainPage from "./containers/MainPage";
 import Auth from "./modules/Auth";
 import { ThemeContext, themes } from "./theme-context";
+import { LanguageContext, languages } from "./language-context";
 
 class App extends Component {
     constructor(props) {
@@ -16,9 +17,15 @@ class App extends Component {
             });
         };
 
+        this.toggleLanguage = languageName => {
+            this.setState({
+                language: languages[languageName],
+            });
+        };
+
         this.state = {
             theme: themes.dark,
-            toggleTheme: this.toggleTheme,
+            language: languages.english
         };
     }
 
@@ -57,31 +64,37 @@ class App extends Component {
 
     render() {
         return (
-            <ThemeContext.Provider value={this.state}>
-                <ThemeContext.Consumer>
-                    {({ theme }) => (
-                        <div
-                            className="App"
-                            style={{ background: theme.mainColor }}
-                        >
-                            <Route exact path="/" component={MainPage} />
-                            <Route exact path="/login" component={LoginPage} />
-                            <Route
-                                exact
-                                path="/register"
-                                component={RegisterPage}
-                            />
-                            <Route
-                                exact
-                                path="/logout"
-                                render={() => {
-                                    Auth.deauthenticateUser();
-                                    return <Redirect to="/" />;
-                                }}
-                            />
-                        </div>
-                    )}
-                </ThemeContext.Consumer>
+            <ThemeContext.Provider value={{theme: this.state.theme, toggleTheme: this.toggleTheme}}>
+                <LanguageContext.Provider value={{language: this.state.language, toggleLanguage: this.toggleLanguage}}>
+                    <ThemeContext.Consumer>
+                        {({ theme }) => (
+                            <div
+                                className="App"
+                                style={{ background: theme.mainColor }}
+                            >
+                                <Route exact path="/" component={MainPage} />
+                                <Route
+                                    exact
+                                    path="/login"
+                                    component={LoginPage}
+                                />
+                                <Route
+                                    exact
+                                    path="/register"
+                                    component={RegisterPage}
+                                />
+                                <Route
+                                    exact
+                                    path="/logout"
+                                    render={() => {
+                                        Auth.deauthenticateUser();
+                                        return <Redirect to="/" />;
+                                    }}
+                                />
+                            </div>
+                        )}
+                    </ThemeContext.Consumer>
+                </LanguageContext.Provider>
             </ThemeContext.Provider>
         );
     }

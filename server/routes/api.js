@@ -66,7 +66,7 @@ router.post("/words", (req, res) => {
                         swedish : req.body.newWord.swedish.filter(n => n),
                         learned : req.body.newWord.learned,
                         helper : req.body.newWord.helper
-                    }
+                    };
                 }
             }
             user.save(err => {
