@@ -146,6 +146,7 @@ class Game extends Component {
 
     handleOnKeyPress(e) {
         e.key === "Enter" && this.checkAnswer();
+        e.key === "s" && e.ctrlKey && this.toggleEditMode();
     }
 
     toggleEditMode() {
@@ -180,7 +181,7 @@ class Game extends Component {
                                 <input
                                     placeholder=":answer"
                                     onChange={this.onChange}
-                                    onKeyPress={this.handleOnKeyPress}
+                                    onKeyDown={this.handleOnKeyPress}
                                     value={this.state.answer}
                                     className={classnames(
                                         { hint: !!this.state.showAnswer },
@@ -194,6 +195,7 @@ class Game extends Component {
                                     type="text"
                                     id="answer"
                                     name="answer"
+                                    tabIndex="0"
                                 />
                             </div>
                         </div>
