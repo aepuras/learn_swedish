@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema(
                 learned: Boolean,
             },
         ],
+        settings: {
+            theme: String,
+            language: String,
+        }
     },
     { usePushEach: true }
 );
