@@ -26,6 +26,7 @@ class Game extends Component {
         this.checkAnswer = this.checkAnswer.bind(this);
         this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
         this.toggleEditMode = this.toggleEditMode.bind(this);
+        this.selectTest = this.selectTest.bind(this);
     }
 
     filteredTests() {
@@ -155,8 +156,29 @@ class Game extends Component {
     }
 
     toggleEditMode() {
-        this.props.toggleEditModeCallback(this.props.editMode ? null : this.filteredTests()[this.state.testIndex]);
+        this.props.toggleEditModeCallback(
+            this.props.editMode
+                ? null
+                : this.filteredTests()[this.state.testIndex]
+        );
         this.answerInput.focus();
+    }
+
+    selectTest() {
+        const index = this.filteredTests().findIndex(
+            test =>
+                test.answers.includes(this.state.answer) ||
+                test.questions.includes(this.state.answer)
+        );
+        if (index > 0) {
+            this.setState({
+                answer: "",
+                noOfMistakes: 0,
+                showAnswer: false,
+                testIndex: index,
+                question: this.getQuestion(index),
+            });
+        }
     }
 
     render() {
@@ -208,6 +230,18 @@ class Game extends Component {
                             </div>
 
                             <div className="buttons">
+                                {this.props.toggleEditModeCallback && (
+                                    <div
+                                        className="buttons-icon"
+                                        onClick={this.selectTest}
+                                    >
+                                        <Icon
+                                            icon={ICONS.SEARCH}
+                                            size={30}
+                                            color={theme.textColor}
+                                        />
+                                    </div>
+                                )}
                                 {this.props.toggleEditModeCallback && (
                                     <div
                                         className="buttons-icon"
