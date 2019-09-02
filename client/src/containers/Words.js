@@ -20,6 +20,7 @@ class Words extends React.Component {
         };
 
         this.addWord = this.addWord.bind(this);
+        this.saveStat = this.saveStat.bind(this);
         this.toggleEditMode = this.toggleEditMode.bind(this);
         this.toggleToFrom = this.toggleToFrom.bind(this);
     }
@@ -39,30 +40,33 @@ class Words extends React.Component {
 
     loadData() {
         this.setState({ loading: true });
-        axios.get("/api/words", this.getAuthHeaders()).then(response => {
-            this.setState({
-                tests: this.shuffleArray(
-                    response.data.items.map(item => {
-                        return {
-                            helper: item.helper,
-                            questions: this.state.toEnglish
-                                ? item.swedish
-                                : item.english,
-                            answers: this.state.toEnglish
-                                ? item.english
-                                : item.swedish,
-                            learned: item.learned,
-                        };
-                    })
-                ),
-                loading: false,
+        axios
+            .get("/api/words", this.getAuthHeaders())
+            .then(response => {
+                this.setState({
+                    tests: this.shuffleArray(
+                        response.data.items.map(item => {
+                            return {
+                                helper: item.helper,
+                                questions: this.state.toEnglish
+                                    ? item.swedish
+                                    : item.english,
+                                answers: this.state.toEnglish
+                                    ? item.english
+                                    : item.swedish,
+                                learned: item.learned,
+                            };
+                        })
+                    ),
+                    loading: false,
+                });
+            })
+            .catch(error => {
+                this.setState({
+                    authorized: error.status !== 401,
+                    loading: false,
+                });
             });
-        }).catch(error => {
-            this.setState({ 
-                authorized: (error.status !== 401),
-                loading: false 
-            });
-        });
     }
 
     shuffleArray(arr) {
@@ -77,12 +81,36 @@ class Words extends React.Component {
     addWord(oldWord, newWord) {
         this.setState({ loading: true });
         axios
-            .post("/api/words", { oldWord: oldWord, newWord: newWord }, this.getAuthHeaders())
+            .post(
+                "/api/words",
+                { oldWord: oldWord, newWord: newWord },
+                this.getAuthHeaders()
+            )
             .then(() => {
                 this.setState({ loading: false });
             });
         this.loadData();
         this.toggleEditMode();
+    }
+
+    saveStat(wrongs, rights, mistakes) {
+        axios
+            .post(
+                "/api/stats",
+                {
+                    game: `words (${
+                        this.state.toEnglish ? "swe to eng" : "eng to swe"
+                    })`,
+                    wrongs: wrongs,
+                    rights: rights,
+                    mistakes: mistakes,
+                    dateTaken: new Date(),
+                },
+                this.getAuthHeaders()
+            )
+            .then(() => {
+                this.setState({ loading: false });
+            });
     }
 
     toggleEditMode(word) {
@@ -129,6 +157,7 @@ class Words extends React.Component {
                     tests={this.state.tests}
                     toggleEditModeCallback={this.toggleEditMode}
                     editMode={this.state.editMode}
+                    saveStatCallback={this.saveStat}
                 />
                 <AddWord
                     callback={this.addWord}
@@ -140,7 +169,11 @@ class Words extends React.Component {
     }
 
     render() {
-        return this.state.authorized ? this.printAuthorized() : <Redirect to="/login" />;
+        return this.state.authorized ? (
+            this.printAuthorized()
+        ) : (
+            <Redirect to="/login" />
+        );
     }
 }
 

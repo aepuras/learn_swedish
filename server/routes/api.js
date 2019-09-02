@@ -8,6 +8,10 @@ router.get("/words", (req, res) => {
     getUserData("words", req, res);
 });
 
+router.get("/stats", (req, res) => {
+    getUserData("stats", req, res);
+});
+
 function getUserData(name, req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.decode(token);
@@ -87,6 +91,37 @@ router.post("/words", (req, res) => {
     });
 });
 
+router.post("/stats", (req, res) => {
+    User.findById(getUserId(req), (userErr, user) => {
+        if (userErr || !user) {
+            console.log(userErr);
+            res.status(401).json({
+                error: "No user",
+            });
+        } else {
+            const stat = {
+                game: req.body.game,
+                wrongs: req.body.wrongs,
+                rights: req.body.rights,
+                mistakes: req.body.mistakes,
+                dateTaken: new Date(),
+            };
+            user.stats.push(stat);
+
+            user.save(err => {
+                if (err) {
+                    console.log(err);
+                    res.status(401).json({
+                        error: "Error saving word",
+                    });
+                } else {
+                    res.send("new word saved");
+                }
+            });
+        }
+    });
+});
+
 router.post("/savesetting", (req, res) => {
     const userId = getUserId(req);
     getUser(userId)
@@ -95,20 +130,16 @@ router.post("/savesetting", (req, res) => {
         .then(user => saveUser(user))
         .catch(err => console.log(err));
 
-
-
-    
     saveUserData(userId, res, user => {
         const settingName = req.body.settingName;
         const settingValue = req.body.settingValue;
-        if(settingName && settingValue) {
+        if (settingName && settingValue) {
             user.settings[settingName] = settingValue;
             return true;
         }
         return false;
     });
 });
-
 
 function getUser(userId) {
     const promise = new Promise((resolve, reject) => {
@@ -117,12 +148,11 @@ function getUser(userId) {
                 reject(Error(userErr));
             } else {
                 resolve(user);
-            } 
+            }
         });
     });
     return promise;
 }
-
 
 function saveUserData(userId, res, updateUserCallback) {
     User.findById(userId, (userErr, user) => {
@@ -147,57 +177,5 @@ function saveUserData(userId, res, updateUserCallback) {
         }
     });
 }
-
-router.post("/words", (req, res) => {
-    User.findById(getUserId(req), (userErr, user) => {
-        if (userErr || !user) {
-            console.log(userErr);
-            res.status(401).json({
-                error: "No user",
-            });
-        } else {
-            if (Object.keys(req.body.oldWord).length === 0) {
-                const word = {
-                    english: req.body.newWord.english.filter(n => n),
-                    swedish: req.body.newWord.swedish.filter(n => n),
-                };
-                user.words.push(word);
-
-            } else {
-                let oldWord = req.body.oldWord;
-                oldWord.english = oldWord.english.filter(n => n);
-                oldWord.swedish = oldWord.swedish.filter(n => n);
-                oldWord.helper === "" && delete oldWord.helper;
-                !oldWord.learned && delete oldWord.learned;
-                
-                const index = user.words.findIndex(word => {
-                    return JSON.stringify(word.english) === JSON.stringify(oldWord.english) &&
-                    JSON.stringify(word.swedish) === JSON.stringify(oldWord.swedish) &&
-                    (!oldWord.learned || word.learned === oldWord.learned) &&
-                    (!oldWord.helper || word.helper === oldWord.helper);
-                });
-
-                if( index >= 0) {
-                    user.words[index] = {
-                        english : req.body.newWord.english.filter(n => n),
-                        swedish : req.body.newWord.swedish.filter(n => n),
-                        learned : req.body.newWord.learned,
-                        helper : req.body.newWord.helper
-                    };
-                }
-            }
-            user.save(err => {
-                if (err) {
-                    console.log(err);
-                    res.status(401).json({
-                        error: "Error saving word",
-                    });
-                } else {
-                    res.send("new word saved");
-                }
-            });
-        }
-    });
-});
 
 module.exports = router;

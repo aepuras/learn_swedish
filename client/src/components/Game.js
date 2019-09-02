@@ -19,6 +19,8 @@ class Game extends Component {
             noOfWrongs: 0,
             noOfRights: 0,
             excludeLearned: false,
+            startIndex: 0,
+            flashStats: false,
         };
 
         this.toggleExcludeLearned = this.toggleExcludeLearned.bind(this);
@@ -27,6 +29,7 @@ class Game extends Component {
         this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
         this.toggleEditMode = this.toggleEditMode.bind(this);
         this.selectTest = this.selectTest.bind(this);
+        this.finishGame = this.finishGame.bind(this);
     }
 
     filteredTests() {
@@ -68,6 +71,7 @@ class Game extends Component {
             ? Math.floor(Math.random() * this.filteredTests().length)
             : this.state.testIndex;
         this.setState({
+            startIndex: tstIndex,
             testIndex: tstIndex,
             question: this.getQuestion(tstIndex),
             noOfWrongs: 0,
@@ -96,11 +100,9 @@ class Game extends Component {
     }
 
     getNextIndex() {
-        let nextIndex =
-            this.state.testIndex >= this.filteredTests().length - 1
-                ? 0
-                : this.state.testIndex + 1;
-        return nextIndex;
+        return this.state.testIndex >= this.filteredTests().length - 1
+            ? 0
+            : this.state.testIndex + 1;
     }
 
     checkAnswer() {
@@ -112,7 +114,7 @@ class Game extends Component {
         };
         this.setState({ showWrong: false });
         if (test.answers.includes(this.state.answer.toLowerCase().trim())) {
-            let nextIndex = this.getNextIndex();
+            const nextIndex = this.getNextIndex();
             this.setState({
                 answer: "",
                 noOfMistakes: 0,
@@ -122,6 +124,7 @@ class Game extends Component {
                 noOfRights:
                     this.state.noOfRights + (this.state.showAnswer ? 0 : 1),
             });
+            nextIndex === this.state.startIndex && this.finishGame();
             this.props.editMode && this.props.toggleEditModeCallback();
         } else {
             const mistakes = ++this.state.noOfMistakes;
@@ -141,6 +144,22 @@ class Game extends Component {
             }
         }
         this.answerInput.focus();
+    }
+
+    finishGame() {
+        this.props.saveStatCallback(
+            this.state.noOfWrongs,
+            this.state.noOfRights,
+            ""
+        );
+        this.setState({
+            flashStats: true,
+            noOfRights: 0,
+            noOfWrongs: 0,
+        });
+        setTimeout(() => {
+            this.setState({ flashStats: false });
+        }, 2000);
     }
 
     getQuestion(index) {
@@ -224,8 +243,20 @@ class Game extends Component {
                         <div className="footer">
                             <div className="stats">
                                 <div>
-                                    <div>{this.state.noOfWrongs}</div>
-                                    <div>{this.state.noOfRights}</div>
+                                    <div
+                                        className={classnames({
+                                            flash: this.state.flashStats,
+                                        })}
+                                    >
+                                        {this.state.noOfWrongs}
+                                    </div>
+                                    <div
+                                        className={classnames({
+                                            flash: this.state.flashStats,
+                                        })}
+                                    >
+                                        {this.state.noOfRights}
+                                    </div>
                                 </div>
                             </div>
 

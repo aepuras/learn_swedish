@@ -8,6 +8,15 @@ const UserSchema = new mongoose.Schema(
             index: { unique: true },
         },
         password: String,
+        stats: [
+            {
+                game: String,
+                wrongs: Number,
+                rights: Number,
+                mistakes: String,
+                dateTaken: Date,
+            },
+        ],
         words: [
             {
                 swedish: [String],
@@ -19,7 +28,7 @@ const UserSchema = new mongoose.Schema(
         settings: {
             theme: String,
             language: String,
-        }
+        },
     },
     { usePushEach: true }
 );

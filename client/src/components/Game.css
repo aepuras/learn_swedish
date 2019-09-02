@@ -64,7 +64,6 @@
     border-radius: 1em;
     font-family: Arial, sans-serif;
     font-weight: bold;
-    margin-right: 10px;
     width: 35px;
     display: flex;
     justify-content: center;
@@ -74,6 +73,12 @@
 
 .stats > div > div:first-child {
     color: #f77070;
+    margin-right: 10px;
+}
+
+.stats > div > div.flash {
+    background-color: red;
+    color: red;
 }
 
 .buttons {

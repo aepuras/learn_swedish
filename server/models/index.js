@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
 
 module.exports.connect = uri => {
-	mongoose.connect(uri);
-	mongoose.Promise = global.Promise;
+    mongoose.connect(uri);
+    mongoose.Promise = global.Promise;
 
-	mongoose.connection.on("error", err => {
-		console.error(`Mongoose connection error: ${err}`);
-		process.exit(1);
-	});
+    mongoose.connection.on("error", err => {
+        console.error(`Mongoose connection error: ${err}`);
+        process.exit(1);
+    });
 
-	require("./user");
-	require("./word");
-	require("./verbsSet");
+    require("./user");
+    require("./verbsSet");
 };

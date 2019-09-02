@@ -6,15 +6,17 @@ export const languages = {
         common: "Common",
         irregular: "Irregular",
         words: "words",
-        verbs: "verbs"
+        verbs: "verbs",
+        stats: "stats",
     },
     romanian: {
         name: "romanian",
         common: "Comune",
         irregular: "Neregulate",
         words: "cuvinte",
-        verbs: "verbe"
-    }
+        verbs: "verbe",
+        stats: "statistici",
+    },
 };
 
 export const LanguageContext = React.createContext({
